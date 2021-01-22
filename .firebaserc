@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "bettercontact-1",
+    "staging": "bettercontact-1",
+    "uat": "bettercontact-1"
+  }
+}
