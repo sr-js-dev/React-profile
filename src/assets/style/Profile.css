@@ -1,6 +1,62 @@
 .photo-section, .talk-about-section, .qoutes-section {
     color: #FFFFFF;
 }
+.dashed-border {
+    border: 2px dashed #343a40;
+    padding: 10px;
+    border-radius: 5px;
+}
+.photo-dashed-border {
+    border: 2px dashed #343a40;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.photo-section .layout {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+.photo-section .photo-detail {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0px 0px 30px 30px;
+}
+.photo-detail p {
+    color: #15202B;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+.photo-detail p:last-child {
+    font-size: 17px;
+}
+.custom-bg-color {
+    background-color: #343535 !important;
+    border-top: 2px dashed #4f5152;
+    z-index: 500;
+}
+.photo-section .add-photo {
+    position: absolute;
+    top: 100px;
+    left: 15px;
+    width: 100%;
+}
+.photo-section .add-photo .add-your-img {
+    font-weight: bold;
+    font-size: 30px;
+    color: darkgray;
+}
+.photo-section .add-photo .img-size {
+    color: darkgray;
+}
 .photo-section .title{
     font-size: 32px;
 }
@@ -29,6 +85,11 @@
 }
 .profile-info-section p {
     font-size: 20px;
+}
+.extra-style {
+    padding: 0px !important;
+    margin-left: 2.4rem !important;
+    margin-right: 2.4rem !important;
 }
 .profile-info-section a {
     text-decoration: underline;
@@ -77,13 +138,15 @@
     font-size: 20px;
     margin-left: 5px;
 }
-.open-edit-menu {
+/* open-edit-menu-bar */
+.open-edit-menu, .open-close-menu {
     position: fixed;
     right: 0px;
     z-index: 999;
     bottom: 0px;
     background-color: #15202b;
     box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s linear;
 }
 .open-edit-menu .open-menu {
     width: 351px;
@@ -118,6 +181,48 @@
 }
 .open-edit-menu .expanded-menu>div:hover {
     background-color: #39444D;
+}
+.open-close-menu .color-picker {
+    background-color: aqua;
+    width: 30px;
+    height: 30px;
+}
+/* open-close-menu-bar */
+.open-close-menu .open-menu {
+    width: 290px;
+    height: 47px;
+    background: #39444D;
+}
+.btn-close-edit-mode {
+    border: none;
+    width: 144px;
+    height: 25px;
+    font-size: 15px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    color: #15202B;
+    outline: 0 !important;
+}
+.open-close-menu .expanded-menu>div {
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+.open-close-menu .expanded-menu>div:first-child {
+    border-bottom: 1px solid #000000;
+}
+.open-close-menu .theme {
+    cursor: pointer;
+}
+.open-close-menu .select-box {
+    width: 118px;
+    height: 26px;
+    padding: 5px;
+}
+.open-close-menu .up-arrow {
+    transform: rotate(-90deg);
 }
 /* modal */
 .modal.show .modal-dialog {

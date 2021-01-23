@@ -8,6 +8,9 @@ import Menu1 from '../assets/img/menu1.svg'
 import CloseMenu from '../assets/img/CloseMenu.svg'
 import Attached from '../assets/img/attach.svg'
 import CloseIcon from '../assets/img/closeIcon.svg'
+import ThemeIcon from '../assets/img/Theme.svg'
+import PhotoAdd from '../assets/img/photoAdd.svg'
+import Arrow from '../assets/img/arrow.svg'
 import Modal from "react-bootstrap/Modal";
 // style
 import "../assets/style/Profile.css";
@@ -17,7 +20,9 @@ import { TalkAboutData } from '../dumy/data'
 const Profile = () => {
   const [talkAbout, setTalkAbout] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [isCloseMenu, setIsCloseMenu] = useState(false)
 
   useEffect(() => {
     if(TalkAboutData.length > 0) {
@@ -32,7 +37,8 @@ const Profile = () => {
 
   const hideModal = () => {
     setIsOpen(false);
-  };
+  }
+
   return (
     <div
       className="container-fluid"
@@ -44,27 +50,51 @@ const Profile = () => {
       }}
     >
       {/* prfile-photo-title-bar */}
-      <div className="profile-photo-title-bar">
-        <p className="title">Profile Sample <span className="ml-3 percent">100%</span><span className="undeited">unedited</span></p>
-      </div>
+      {
+        !isEditMode ?
+        <div className="profile-photo-title-bar">
+          <p className="title">Profile Sample <span className="ml-3 percent">100%</span><span className="undeited">unedited</span></p>
+        </div> : null
+      }
       <div className="row">
         <div className="col-lg-7">
           <div className="ml-3 border border-dark">
             <div className="row py-2 mx-4 py-4">
               <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg hidden-sm">
-                <img src={Logo} className="" alt="siteLogo" />
+                <img src={Logo} alt="siteLogo" />
               </div>
             </div>
             {/* section1 */}
             <div className="border-bottom border-dark photo-section">
               <div className="row py-2 mx-4">
                 <div className="col-lg-5">
-                  <img src={ProfileImg} alt="profile" className="w-100" />
+                  <div className= {isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
+                    {
+                      isEditMode ?
+                      <>
+                        <div className="layout"></div>
+                        <div className="add-photo d-flex align-items-center">
+                          <div className="h-100">
+                            <img src={PhotoAdd} alt="photoAdd" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="mb-0 add-your-img">Add your Image</p>
+                            <p className="mb-0 img-size">W 200 * H 300</p>
+                          </div>
+                        </div>
+                      </> : null
+                    }
+                    <div className= {isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
+                      <p className={isEditMode ? 'text-white font-weight-bold text-center' : 'font-weight-bold text-center'}>Omar Faruq BA (Hons), ACCA</p>
+                      <p className={isEditMode ? 'text-white text-center' : 'text-center'}>Client Partner - Tech & High Growth</p>
+                    </div>
+                    <img src={ProfileImg} alt="profile" className="w-100" />
+                  </div>
                 </div>
                 <div className="col-lg-7">
-                  <h2 className="title mb-4">Why you should contact me</h2>
-                  <p className="description">I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
-                  <p className="similar-subject">
+                  <h2 className= {isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
+                  <p className= {isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
+                  <p className= {isEditMode ? 'dashed-border similar-subject' : 'similar-subject'}>
                     <span>Contact me on similar subject now</span>
                     <span className="ml-3">
                       <img src={Vector} onClick={showModal} alt="Vector" />
@@ -77,37 +107,37 @@ const Profile = () => {
             <div className="talk-about-section border-bottom border-dark">
               <div className="row py-2 mx-4">
                 <div className="col-lg-12 mt-4 mb-3">
-                  <h2 className="title">What we can talk about</h2>
+                  <h2 className= {isEditMode ? 'dashed-border title' : 'title'}>What we can talk about</h2>
                     {
                       talkAbout && talkAbout.map((item, i) => (
-                        TalkAboutParagraph(item.content, i)
+                        TalkAboutParagraph(item.content, i, isEditMode)
                       ))
                     }
                 </div>
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section">
-              <div className="row py-2 mx-4">
-                <div className="col-lg-4 mt-3">
+            <div className="profile-info-section pt-4">
+              <div className={isEditMode ? ' row py-2 dashed-border extra-style' : 'row py-2 mx-4'}>
+                <div className="col-lg-4 mb-3">
                     <h1>Company</h1>
                     <p className="mb-0">OnTheGo Accountants</p>
                 </div>
-                <div className="col-lg-4 mt-3">
+                <div className="col-lg-4 mb-3">
                     <h1>Department</h1>
                     <p className="mb-0">Tech & Growth</p>
                 </div>
-                <div className="col-lg-4 mt-3">
+                <div className="col-lg-4 mb-3">
                     <h1>Location</h1>
                     <p className="mb-0">Birmingham</p>
                 </div>
-                <div className="col-lg-4 mt-3">
+                <div className="col-lg-4 mb-3">
                     <h1>Address</h1>
                     <p className="mb-0">The Colmore Building</p>
                     <p className="mb-0">20 Colmore Circus Queensway</p>
                     <p className="mb-0">Birmingham, B4 6AT</p>
                 </div>
-                <div className="col-lg-4 mt-3">
+                <div className="col-lg-4 mb-3">
                     <h1>Office number</h1>
                     <a href="#">03330 067 123</a>
                 </div>
@@ -117,40 +147,81 @@ const Profile = () => {
         </div>
         {/* section4 */}
         <div className="col-lg-5 qoutes-section px-4">
-          <p className="title mb-4">Qoutes from Clients <span className="font-weight-bold">About me</span></p>
-          <p className="content font-weight-bold">“This is by far the best accounting service that I've ever used. A unique combination of quality,
-            affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
-            For our company (Eventera Ltd),
-            <span className="emphases">they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!”</span>
-          </p>
-          <p className="title mb-5">Petros Topouzis, Founder : eventera.io</p>
-          <p className="content font-weight-bold">I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.
-            <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
-          </p>
-          <p className="title mb-5">Viswa, Founder</p>
+          <div>
+            <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
+          </div>
+          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'}>
+            <p className='content font-weight-bold'>“This is by far the best accounting service that I've ever used. A unique combination of quality,
+              affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
+              For our company (Eventera Ltd),
+              <span className="emphases">they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!”</span>
+            </p>
+            <p className='title'>Petros Topouzis, Founder : eventera.io</p>
+          </div>
+          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'}>
+            <p className="content font-weight-bold">I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.
+              <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
+            </p>
+            <p className="title">Viswa, Founder</p>
+          </div>
         </div>
       </div>
       {/* open Edit Menu */}
-      <div className="open-edit-menu">
-        {
-          isOpenMenu ?
-          <div className="expanded-menu">
-            <div>My Profile</div>
-            <div>Billing</div>
-            <div>Log out</div>
-          </div> : null
-        }
-        <div className="open-menu d-flex justify-content-around align-items-center">
-          <div className="menu-icon">
-            <img src={isOpenMenu ? CloseMenu : Menu1} onClick={() => setIsOpenMenu(!isOpenMenu)} alt="menu" />
+      {
+        !isEditMode ? 
+        <div className="open-edit-menu">
+          {
+            isOpenMenu ?
+            <div className="expanded-menu">
+              <div>My Profile</div>
+              <div>Billing</div>
+              <div>Log out</div>
+            </div> : null
+          }
+          <div className="open-menu d-flex justify-content-around align-items-center">
+            <div className="menu-icon">
+              <img src={isOpenMenu ? CloseMenu : Menu1} onClick={() => setIsOpenMenu(!isOpenMenu)} alt="menu" />
+            </div>
+            <div className="d-flex align-items-center share">
+              <img src={Attached} alt="attached" />
+              <span className="ml-1">Share</span>
+            </div>
+            <button className="btn-open-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Open Edit Mode</strong></button>
           </div>
-          <div className="d-flex align-items-center share">
-            <img src={Attached} alt="attached" />
-            <span className="ml-1">Share</span>
+        </div> :
+        // open Close menu bar
+        <div className="open-close-menu">
+          {
+            isCloseMenu ?
+            <div className="expanded-menu">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>Background:</div>
+                <div>
+                  <div className="d-flex justify-content-between align-items-center border border-white select-box">
+                    <span>Dark</span>
+                    <span><img src={Arrow} alt="arrow" /></span>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>Brand Colour:</div>
+                <div className="color-picker">
+                  
+                </div>
+                <div className="dashed-border p-1">
+                  7C2A28
+                </div>
+              </div>
+            </div> : null
+          }
+          <div className="open-menu d-flex justify-content-around align-items-center">
+            <div className="d-flex align-items-center theme" onClick={() => setIsCloseMenu(!isCloseMenu)}>
+              <img src={isOpenMenu ? CloseMenu : ThemeIcon} alt="menu" />
+              <span className="ml-1 text-white">Theme</span>
+            </div>
+            <button className="btn-close-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Close Edit Mode</strong></button>
           </div>
-          <button className="btn-open-edit-mode"><strong>Open Edit Mode</strong></button>
-        </div>
-      </div>
+        </div> }
       {/* modal */}
       <Modal show={isOpen} onHide={hideModal}>
         <Modal.Body>
@@ -174,9 +245,9 @@ const Profile = () => {
 }
 
 // talk about content
-const TalkAboutParagraph = (txt, id) => {
+function TalkAboutParagraph (txt, id, mode) {
   return (
-    <div className="d-flex mt-3" key={id}>
+    <div className={mode ? 'd-flex mt-3 dashed-border' : 'd-flex mt-3'} key={id}>
       <div>
         <img src={List} alt="List" />
       </div>
