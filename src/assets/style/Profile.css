@@ -1,0 +1,120 @@
+.photo-section, .talk-about-section, .qoutes-section {
+    color: #FFFFFF;
+}
+.photo-section .title{
+    font-size: 32px;
+}
+.photo-section .description {
+    font-size: 16px;
+}
+.photo-section .similar-subject {
+    font-size: 20px;
+}
+.photo-section .similar-subject img {
+    cursor: pointer;
+}
+.talk-about-section .title{
+    font-size: 32px;
+}
+.talk-about-section .description {
+    font-size: 20px;
+}
+.profile-info-section {
+    color: #FFFFFF;
+    padding-bottom: 100px;
+}
+.profile-info-section h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+.profile-info-section p {
+    font-size: 20px;
+}
+.profile-info-section a {
+    text-decoration: underline;
+}
+.qoutes-section {
+    padding-top: 95px;
+}
+.qoutes-section .title {
+    font-size: 20px;
+}
+.qoutes-section .content {
+    font-size: 18px;
+}
+.qoutes-section .emphases {
+    background-color: #CFF2EE;
+    color: black;
+}
+.profile-photo-title-bar {
+    position: fixed;
+    width: 681.87px;
+    height: 50px;
+    left: -60.71px;
+    top: 117.72px;
+    background: #39444D;
+    transform: rotate(-30deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    color: #FFFFFF;
+}
+.profile-photo-title-bar p.title {
+    margin-bottom: 0px;
+    font-size: 33px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-photo-title-bar .percent {
+    font-size: 20px;
+    font-weight: normal;
+}
+.profile-photo-title-bar .undeited {
+    color: #C95355;
+    font-size: 20px;
+    margin-left: 5px;
+}
+.open-edit-menu {
+    position: fixed;
+    right: 0px;
+    z-index: 999;
+    bottom: 0px;
+    background-color: #15202b;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.open-edit-menu .open-menu {
+    width: 351px;
+    height: 47px;
+    background: #39444D;
+}
+.btn-open-edit-mode {
+    border: none;
+    width: 144px;
+    height: 25px;
+    font-size: 15px;
+    background: #55ACEE;
+    border-radius: 4px;
+    color: #FFFFFF;
+    outline: 0 !important;
+}
+.open-edit-menu .share {
+    color: darkgray;
+}
+.open-edit-menu .menu-icon {
+    cursor: pointer;
+}
+.open-edit-menu .expanded-menu {
+    transition: all 0.4s ease-in-out;
+}
+.open-edit-menu .expanded-menu>div {
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.open-edit-menu .expanded-menu>div:hover {
+    background-color: #39444D;
+}

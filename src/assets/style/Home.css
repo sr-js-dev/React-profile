@@ -64,6 +64,16 @@ border-radius: 20px;
 color: #FFFFFF;
 outline: 0 !important;
 }
+.btn-sample-page {
+    border: none;
+    width: 230px;
+    height: 55px;
+    font-size: 19px;
+    background: #55ACEE;
+    border-radius: 30px;
+    color: #FFFFFF;
+    outline: 0 !important;
+}
 /* .main-2 h1{
     color: #55ACEE;
     font-size: 70px;
@@ -326,6 +336,15 @@ outline: 0 !important;
 border-radius: 20px;
 width: 150px;
     height: 40px;
+    outline: 0 !important;
+}
+.btn-sample-page-sm{
+    color: #FFFFFF;
+    background: #55ACEE;
+    font-size: 19px;
+    border-radius: 30px;
+    width: 230px;
+    height: 55px;
     outline: 0 !important;
 }
 .f-12{

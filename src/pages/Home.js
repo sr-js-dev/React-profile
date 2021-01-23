@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 // image desktop
 import Img1 from "../assets/img/Img-1.svg";
 import Img2 from '../assets/img/ImgSec-2.png'
@@ -74,8 +74,9 @@ export default class Home extends Component {
             <img src={contentTop} className="hidden-sm w-100 mb-5"/>
               <h3 className="hidden-lg lh-3 hidden-md f-30-sm">A better way to</h3>
               <h3 className="hidden-lg lh-3 hidden-md f-30-sm">to get inbound leads</h3>
-<p className="hidden-lg hidden-md lh-2 text-center mt-4">Grow Better Leads, Get Better Client,  </p>
-<p className="hidden-lg hidden-md lh-2 text-center">Achieve Better Client Experience.</p>
+              <p className="hidden-lg hidden-md lh-2 text-center mt-4">Grow Better Leads, Get Better Client,  </p>
+              <p className="hidden-lg hidden-md lh-2 text-center">Achieve Better Client Experience.</p>
+              <Link to="/profile"><button className="btn-sample-page hidden-sm"><strong>See sample page</strong></button></Link>
             </div>
             {/* show if screen mobile */}
             <div className="hidden-md row mx-2 hidden-lg my-4 pt-5">
@@ -90,6 +91,9 @@ export default class Home extends Component {
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQX-ZGJV_vxjcpySS7d_3WqEspJa453J7uiDQYUe_0ziOFjA/viewform" target="_blank">
                   <button className="btn-create-account-sm border-none hidden-lg hidden-md"><strong>Create account</strong></button>
                   </a>
+                  </div>
+                  <div className="col-12 text-center mt-5 hidden-md">
+                    <Link to="/profile"><button className="btn-sample-page-sm border-none"><strong>See sample page</strong></button></Link>
                   </div>
                 </div>
               </div>
