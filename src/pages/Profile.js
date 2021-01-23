@@ -7,6 +7,8 @@ import List from "../assets/img/List.svg";
 import Menu1 from '../assets/img/menu1.svg'
 import CloseMenu from '../assets/img/CloseMenu.svg'
 import Attached from '../assets/img/attach.svg'
+import CloseIcon from '../assets/img/closeIcon.svg'
+import Modal from "react-bootstrap/Modal";
 // style
 import "../assets/style/Profile.css";
 // dumy data
@@ -15,6 +17,7 @@ import { TalkAboutData } from '../dumy/data'
 const Profile = () => {
   const [talkAbout, setTalkAbout] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
 
   useEffect(() => {
     if(TalkAboutData.length > 0) {
@@ -22,6 +25,14 @@ const Profile = () => {
     }
   }, [TalkAboutData])
 
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div
       className="container-fluid"
@@ -29,7 +40,7 @@ const Profile = () => {
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: "cover",
         height: "100%",
-        width: "100%",
+        width: "100%" 
       }}
     >
       {/* prfile-photo-title-bar */}
@@ -56,7 +67,7 @@ const Profile = () => {
                   <p className="similar-subject">
                     <span>Contact me on similar subject now</span>
                     <span className="ml-3">
-                      <img src={Vector} alt="Vector" />
+                      <img src={Vector} onClick={showModal} alt="Vector" />
                     </span>
                   </p>
                 </div>
@@ -139,8 +150,25 @@ const Profile = () => {
           </div>
           <button className="btn-open-edit-mode"><strong>Open Edit Mode</strong></button>
         </div>
-          
       </div>
+      {/* modal */}
+      <Modal show={isOpen} onHide={hideModal}>
+        <Modal.Body>
+          <div className="close-icon">
+            <img src={CloseIcon} onClick={hideModal} alt="closeIcon" />
+          </div>
+          <div className="content">
+            <p className="font-weight-bold mb-4">To: Omar Faruq</p>
+            <p className="mb-4">My name is <span className="profile-detail">Jane Smith</span>.</p>
+            <p className="mb-4">I work at <span className="profile-detail">Company</span>; we have around <span className="profile-detail">xx employees</span>.</p>
+            <p className="mb-4">My phone number is <span className="profile-detail">+XX-X-XXX-XXXX</span>, and my work email is <span className="profile-detail">jane.smith@company.com</span>.</p>
+            <p className="mb-4">I will like to discuss this  <span className="discuss-content">“I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></p>
+          </div>
+          <div className="send-btn-part d-flex justify-content-around align-items-center w-100 mt-5">
+            <button className="btn-send font-weight-bold">Send</button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }

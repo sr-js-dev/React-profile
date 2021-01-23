@@ -114,7 +114,63 @@
     font-size: 15px;
     padding: 10px 15px;
     cursor: pointer;
+    transition: all 0.3s linear;
 }
 .open-edit-menu .expanded-menu>div:hover {
     background-color: #39444D;
+}
+/* modal */
+.modal.show .modal-dialog {
+    max-width: 839px;
+    top: 27px;
+}
+.modal-content {
+    background: #15202B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px !important;
+}
+.modal-body {
+    background-color: #15202B;
+    padding: 60px !important;
+    color: #FFFFFF;
+    border-radius: 4px !important;
+}
+.modal-body .close-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+.modal-body .content {
+    font-size: 27px;
+}
+.modal-body .profile-detail {
+    color: #39444D;
+    text-decoration: underline;
+}
+.modal-body .discuss-content {
+    color: #55ACEE;
+}
+.modal-body .btn-send {
+    background: #FFFFFF;
+    border-radius: 70px;
+    color: #15202B;
+    font-size: 27px;
+    border: none;
+    outline: none;
+    width: 261px;
+    height: 53px;
+    transition: all 0.3s linear;
+}
+.modal-body .btn-send:hover {
+    background-color:#55ACEE;
+    color: #FFFFFF;
+}
+
+@media (max-width:576px) {
+    .modal-body {
+        padding: 15px !important;
+    }
 }
