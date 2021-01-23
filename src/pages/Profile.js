@@ -26,6 +26,7 @@ const Profile = () => {
   const [isTalkEdit, setIsTalkEdit] = useState(false)
   const [isOpenSelect, setIsOpenSelect] = useState(false)
   const [selectVal, setSelectVal] = useState('Dark')
+  const [colorVal, setColorVal] = useState('#55ACEE')
 
   useEffect(() => {
     if (TalkAboutData.length > 0) {
@@ -61,20 +62,23 @@ const Profile = () => {
   const isShowHide = () => {
     setIsOpenSelect(!isOpenSelect)
   }
-
   const handleChange = (val) => {
     setSelectVal(val)
     // setIsOpenSelect(false)
+  }
+  const colorChange = (val) => {
+    setColorVal(val)
   }
 
   return (
     <div
       className="container-fluid"
       style={{
-        backgroundImage: `url(${BackgroundImg})`,
+        backgroundImage: !isEditMode ? `url(${BackgroundImg})` : null,
         backgroundSize: "cover",
         height: "100%",
-        width: "100%"
+        width: "100%",
+        backgroundColor: !isTalkEdit ? '#15202B' : 'rgb(0,0,0, 0.8)'
       }}
     >
       {/* prfile-photo-title-bar */}
@@ -261,9 +265,10 @@ const Profile = () => {
                   <div className="d-flex justify-content-between align-items-center">
                     <div>Brand Colour:</div>
                     <div className="color-picker">
+                      <input type="color" id="colorPicker" onChange={(e) => colorChange(e.target.value)} name="favcolor" value={colorVal} />
                     </div>
                     <div className="dashed-border p-1">
-                      7C2A28
+                      {colorVal}
                 </div>
                   </div>
                 </div> : null

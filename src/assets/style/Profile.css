@@ -229,9 +229,9 @@
     background-color: #39444D;
 }
 .open-close-menu .color-picker {
-    background-color: aqua;
-    width: 30px;
-    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* open-close-menu-bar */
 .open-close-menu .open-menu {
@@ -285,6 +285,14 @@
 }
 .open-close-menu .select-list li:hover {
     color: #84b9e2;
+}
+.open-close-menu #colorPicker {
+    background: none;
+    padding: 0px;
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
 }
 /* modal */
 .register.show .modal-dialog {
