@@ -72,7 +72,7 @@ const Profile = () => {
 
   return (
     <div
-      className="container-fluid"
+      className={!isTalkEdit ? "container-fluid" : "container-fluid bg-low"}
       style={{
         backgroundImage: !isEditMode ? `url(${BackgroundImg})` : null,
         backgroundSize: "cover",
@@ -92,12 +92,12 @@ const Profile = () => {
         <div className="col-lg-7">
           <div className="ml-3 border border-dark">
             <div className="row py-2 mx-4 py-4">
-              <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg hidden-sm">
+              <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg hidden-sm bg-item">
                 <img src={Logo} alt="siteLogo" />
               </div>
             </div>
             {/* section1 */}
-            <div className="border-bottom border-dark photo-section">
+            <div className="border-bottom border-dark photo-section bg-item">
               <div className="row py-2 mx-4">
                 <div className="col-lg-5">
                   <div className={isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
@@ -126,10 +126,10 @@ const Profile = () => {
                 <div className="col-lg-7">
                   <h2 className={isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
                   <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
-                  <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'}>
+                  <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
                     <span>Contact me on similar subject now</span>
                     <span className="ml-3">
-                      <img src={Vector} onClick={showModal} alt="Vector" />
+                      <img src={Vector} alt="Vector" />
                     </span>
                   </p>
                 </div>
@@ -166,7 +166,7 @@ const Profile = () => {
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section pt-4">
+            <div className="profile-info-section pt-4 bg-item">
               <div className={isEditMode ? ' row py-2 dashed-border extra-style' : 'row py-2 mx-4'}>
                 <div className="col-lg-4 mb-3">
                   <h1>Company</h1>
@@ -195,7 +195,7 @@ const Profile = () => {
           </div>
         </div>
         {/* section4 */}
-        <div className="col-lg-5 qoutes-section px-4">
+        <div className="col-lg-5 qoutes-section px-4 bg-item">
           <div>
             <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
           </div>
@@ -218,7 +218,7 @@ const Profile = () => {
       {/* open Edit Menu */}
       {
         !isEditMode ?
-          <div className="open-edit-menu">
+          <div className="open-edit-menu bg-item">
             {
               isOpenMenu ?
                 <div className="expanded-menu">
@@ -239,7 +239,7 @@ const Profile = () => {
             </div>
           </div> :
           // open Close menu bar
-          <div className="open-close-menu">
+          <div className="open-close-menu bg-item">
             {
               isCloseMenu ?
                 <div className="expanded-menu">

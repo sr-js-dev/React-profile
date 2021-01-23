@@ -6,6 +6,9 @@
     padding: 10px;
     border-radius: 5px;
 }
+.bg-low .bg-item {
+    opacity: 0.5;
+}
 .photo-dashed-border {
     border: 2px dashed #343a40;
     border-radius: 30px;
@@ -65,8 +68,6 @@
 }
 .photo-section .similar-subject {
     font-size: 20px;
-}
-.photo-section .similar-subject img {
     cursor: pointer;
 }
 .talk-about-section .title{
