@@ -15,28 +15,56 @@ import Modal from "react-bootstrap/Modal";
 // style
 import "../assets/style/Profile.css";
 // dumy data
-import { TalkAboutData } from '../dumy/data'
+import { TalkAboutData, ThemeMode } from '../dumy/data'
 
 const Profile = () => {
   const [talkAbout, setTalkAbout] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false)
   const [isCloseMenu, setIsCloseMenu] = useState(false)
+  const [isTalkEdit, setIsTalkEdit] = useState(false)
+  const [isOpenSelect, setIsOpenSelect] = useState(false)
+  const [selectVal, setSelectVal] = useState('Dark')
 
   useEffect(() => {
-    if(TalkAboutData.length > 0) {
+    if (TalkAboutData.length > 0) {
       setTalkAbout(TalkAboutData)
     }
   }, [TalkAboutData])
 
+  useEffect(() => {
+    document.addEventListener("click", closeSelect);
+    return () => document.removeEventListener("click", closeSelect)
+  }, [isOpenSelect])
 
+  const closeSelect = (evt) => {
+    if (evt.target.id === "isOpenSelect") return;
+    setIsOpenSelect(false)
+  }
+  // modal show
   const showModal = () => {
-    setIsOpen(true);
+    setIsOpenModal(true);
   };
-
+  // modal hide
   const hideModal = () => {
-    setIsOpen(false);
+    setIsOpenModal(false);
+  }
+  // What we can talk about section Edit display
+  const talkAboutDisplay = () => {
+    setIsTalkEdit(true)
+  }
+  // What we can talk about section Edit display
+  const hideSaveForm = () => {
+    setIsTalkEdit(false)
+  }
+  const isShowHide = () => {
+    setIsOpenSelect(!isOpenSelect)
+  }
+
+  const handleChange = (val) => {
+    setSelectVal(val)
+    // setIsOpenSelect(false)
   }
 
   return (
@@ -46,15 +74,15 @@ const Profile = () => {
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: "cover",
         height: "100%",
-        width: "100%" 
+        width: "100%"
       }}
     >
       {/* prfile-photo-title-bar */}
       {
         !isEditMode ?
-        <div className="profile-photo-title-bar">
-          <p className="title">Profile Sample <span className="ml-3 percent">100%</span><span className="undeited">unedited</span></p>
-        </div> : null
+          <div className="profile-photo-title-bar">
+            <p className="title">Profile Sample <span className="ml-3 percent">100%</span><span className="undeited">unedited</span></p>
+          </div> : null
       }
       <div className="row">
         <div className="col-lg-7">
@@ -68,23 +96,23 @@ const Profile = () => {
             <div className="border-bottom border-dark photo-section">
               <div className="row py-2 mx-4">
                 <div className="col-lg-5">
-                  <div className= {isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
+                  <div className={isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
                     {
                       isEditMode ?
-                      <>
-                        <div className="layout"></div>
-                        <div className="add-photo d-flex align-items-center">
-                          <div className="h-100">
-                            <img src={PhotoAdd} alt="photoAdd" />
+                        <>
+                          <div className="layout"></div>
+                          <div className="add-photo d-flex align-items-center">
+                            <div className="h-100">
+                              <img src={PhotoAdd} alt="photoAdd" />
+                            </div>
+                            <div className="ml-2">
+                              <p className="mb-0 add-your-img">Add your Image</p>
+                              <p className="mb-0 img-size">W 200 * H 300</p>
+                            </div>
                           </div>
-                          <div className="ml-2">
-                            <p className="mb-0 add-your-img">Add your Image</p>
-                            <p className="mb-0 img-size">W 200 * H 300</p>
-                          </div>
-                        </div>
-                      </> : null
+                        </> : null
                     }
-                    <div className= {isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
+                    <div className={isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
                       <p className={isEditMode ? 'text-white font-weight-bold text-center' : 'font-weight-bold text-center'}>Omar Faruq BA (Hons), ACCA</p>
                       <p className={isEditMode ? 'text-white text-center' : 'text-center'}>Client Partner - Tech & High Growth</p>
                     </div>
@@ -92,9 +120,9 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="col-lg-7">
-                  <h2 className= {isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
-                  <p className= {isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
-                  <p className= {isEditMode ? 'dashed-border similar-subject' : 'similar-subject'}>
+                  <h2 className={isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
+                  <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
+                  <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'}>
                     <span>Contact me on similar subject now</span>
                     <span className="ml-3">
                       <img src={Vector} onClick={showModal} alt="Vector" />
@@ -105,14 +133,31 @@ const Profile = () => {
             </div>
             {/* section2 */}
             <div className="talk-about-section border-bottom border-dark">
-              <div className="row py-2 mx-4">
-                <div className="col-lg-12 mt-4 mb-3">
-                  <h2 className= {isEditMode ? 'dashed-border title' : 'title'}>What we can talk about</h2>
-                    {
-                      talkAbout && talkAbout.map((item, i) => (
-                        TalkAboutParagraph(item.content, i, isEditMode)
-                      ))
-                    }
+              <div className={isTalkEdit ? 'row extra-style' : 'row py-2 mx-4'}>
+                <div className="col-lg-12 mt-4 mb-3 position-relative">
+                  <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>What we can talk about</h2>
+                  {
+                    talkAbout && talkAbout.map((item, i) => (
+                      TalkAboutParagraph(item.content, i, isEditMode)
+                    ))
+                  }
+                  {
+                    isEditMode && isTalkEdit &&
+                    <div className="talk-about-edit">
+                      <div className="position-relative">
+                        <button onClick={hideSaveForm} className="btn-save-edit-mode">Save</button>
+                        <div className="title">
+                          <input type="text" name="title" autoFocus={true} placeholder="What we can talk about" />
+                          <span>Maximum 40 characters per Dept</span>
+                        </div>
+                        <ol className="list-content mt-3">
+                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                        </ol>
+                      </div>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -120,26 +165,26 @@ const Profile = () => {
             <div className="profile-info-section pt-4">
               <div className={isEditMode ? ' row py-2 dashed-border extra-style' : 'row py-2 mx-4'}>
                 <div className="col-lg-4 mb-3">
-                    <h1>Company</h1>
-                    <p className="mb-0">OnTheGo Accountants</p>
+                  <h1>Company</h1>
+                  <p className="mb-0">OnTheGo Accountants</p>
                 </div>
                 <div className="col-lg-4 mb-3">
-                    <h1>Department</h1>
-                    <p className="mb-0">Tech & Growth</p>
+                  <h1>Department</h1>
+                  <p className="mb-0">Tech & Growth</p>
                 </div>
                 <div className="col-lg-4 mb-3">
-                    <h1>Location</h1>
-                    <p className="mb-0">Birmingham</p>
+                  <h1>Location</h1>
+                  <p className="mb-0">Birmingham</p>
                 </div>
                 <div className="col-lg-4 mb-3">
-                    <h1>Address</h1>
-                    <p className="mb-0">The Colmore Building</p>
-                    <p className="mb-0">20 Colmore Circus Queensway</p>
-                    <p className="mb-0">Birmingham, B4 6AT</p>
+                  <h1>Address</h1>
+                  <p className="mb-0">The Colmore Building</p>
+                  <p className="mb-0">20 Colmore Circus Queensway</p>
+                  <p className="mb-0">Birmingham, B4 6AT</p>
                 </div>
                 <div className="col-lg-4 mb-3">
-                    <h1>Office number</h1>
-                    <a href="#">03330 067 123</a>
+                  <h1>Office number</h1>
+                  <a href="#">03330 067 123</a>
                 </div>
               </div>
             </div>
@@ -152,8 +197,8 @@ const Profile = () => {
           </div>
           <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'}>
             <p className='content font-weight-bold'>“This is by far the best accounting service that I've ever used. A unique combination of quality,
-              affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
-              For our company (Eventera Ltd),
+            affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
+            For our company (Eventera Ltd),
               <span className="emphases">they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!”</span>
             </p>
             <p className='title'>Petros Topouzis, Founder : eventera.io</p>
@@ -168,62 +213,71 @@ const Profile = () => {
       </div>
       {/* open Edit Menu */}
       {
-        !isEditMode ? 
-        <div className="open-edit-menu">
-          {
-            isOpenMenu ?
-            <div className="expanded-menu">
-              <div>My Profile</div>
-              <div>Billing</div>
-              <div>Log out</div>
-            </div> : null
-          }
-          <div className="open-menu d-flex justify-content-around align-items-center">
-            <div className="menu-icon">
-              <img src={isOpenMenu ? CloseMenu : Menu1} onClick={() => setIsOpenMenu(!isOpenMenu)} alt="menu" />
+        !isEditMode ?
+          <div className="open-edit-menu">
+            {
+              isOpenMenu ?
+                <div className="expanded-menu">
+                  <div>My Profile</div>
+                  <div>Billing</div>
+                  <div>Log out</div>
+                </div> : null
+            }
+            <div className="open-menu d-flex justify-content-around align-items-center">
+              <div className="menu-icon">
+                <img src={isOpenMenu ? CloseMenu : Menu1} onClick={() => setIsOpenMenu(!isOpenMenu)} alt="menu" />
+              </div>
+              <div className="d-flex align-items-center share">
+                <img src={Attached} alt="attached" />
+                <span className="ml-1">Share</span>
+              </div>
+              <button className="btn-open-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Open Edit Mode</strong></button>
             </div>
-            <div className="d-flex align-items-center share">
-              <img src={Attached} alt="attached" />
-              <span className="ml-1">Share</span>
-            </div>
-            <button className="btn-open-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Open Edit Mode</strong></button>
-          </div>
-        </div> :
-        // open Close menu bar
-        <div className="open-close-menu">
-          {
-            isCloseMenu ?
-            <div className="expanded-menu">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>Background:</div>
-                <div>
-                  <div className="d-flex justify-content-between align-items-center border border-white select-box">
-                    <span>Dark</span>
-                    <span><img src={Arrow} alt="arrow" /></span>
+          </div> :
+          // open Close menu bar
+          <div className="open-close-menu">
+            {
+              isCloseMenu ?
+                <div className="expanded-menu">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div>Background:</div>
+                    <div className="position-realtive">
+                      <div className="d-flex justify-content-between align-items-center border border-white select-box" id="isOpenSelect" onClick={isShowHide}>
+                        <span>{selectVal}</span>
+                        <span><img src={Arrow} className="arrow" alt="arrow" style={{ transform: isOpenSelect ? 'rotate(-180deg)' : 'rotate(0deg)' }} /></span>
+                      </div>
+                      {
+                        isOpenSelect &&
+                        <ul className="select-list">
+                          {
+                            ThemeMode && ThemeMode.length > 0 && ThemeMode.map((item, i) => (
+                              <li key={i} onClick={() => handleChange(item.color)}>{item.color}</li>
+                            ))
+                          }
+                        </ul>
+                      }
+                    </div>
                   </div>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div>Brand Colour:</div>
+                    <div className="color-picker">
+                    </div>
+                    <div className="dashed-border p-1">
+                      7C2A28
                 </div>
+                  </div>
+                </div> : null
+            }
+            <div className="open-menu d-flex justify-content-around align-items-center">
+              <div className="d-flex align-items-center theme" onClick={() => setIsCloseMenu(!isCloseMenu)}>
+                <img src={isCloseMenu ? CloseMenu : ThemeIcon} alt="menu" />
+                <span className="ml-1 text-white">Theme</span>
               </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>Brand Colour:</div>
-                <div className="color-picker">
-                  
-                </div>
-                <div className="dashed-border p-1">
-                  7C2A28
-                </div>
-              </div>
-            </div> : null
-          }
-          <div className="open-menu d-flex justify-content-around align-items-center">
-            <div className="d-flex align-items-center theme" onClick={() => setIsCloseMenu(!isCloseMenu)}>
-              <img src={isOpenMenu ? CloseMenu : ThemeIcon} alt="menu" />
-              <span className="ml-1 text-white">Theme</span>
+              <button className="btn-close-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Close Edit Mode</strong></button>
             </div>
-            <button className="btn-close-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Close Edit Mode</strong></button>
-          </div>
-        </div> }
+          </div>}
       {/* modal */}
-      <Modal show={isOpen} onHide={hideModal}>
+      <Modal show={isOpenModal} onHide={hideModal} className="register">
         <Modal.Body>
           <div className="close-icon">
             <img src={CloseIcon} onClick={hideModal} alt="closeIcon" />
@@ -245,7 +299,7 @@ const Profile = () => {
 }
 
 // talk about content
-function TalkAboutParagraph (txt, id, mode) {
+function TalkAboutParagraph(txt, id, mode) {
   return (
     <div className={mode ? 'd-flex mt-3 dashed-border' : 'd-flex mt-3'} key={id}>
       <div>

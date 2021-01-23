@@ -12,3 +12,14 @@ export const TalkAboutData = [
         "content": "Talk about how our firm has transformed businesses in your industry. "
     }
   ];
+
+export const ThemeMode = [
+    {
+        "id": "1",
+        "color": "Dark"
+    },
+    {
+        "id": "2",
+        "color": "White"
+    },
+  ];
