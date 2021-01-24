@@ -28,16 +28,22 @@ const Profile = () => {
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
 
+  // Talk About string get from dumy data
   useEffect(() => {
     if (TalkAboutData.length > 0) {
       setTalkAbout(TalkAboutData)
     }
-  }, [TalkAboutData])
+  }, [])
 
+  // select option hide event
   useEffect(() => {
     document.addEventListener("click", closeSelect);
     return () => document.removeEventListener("click", closeSelect)
   }, [isOpenSelect])
+
+  useEffect(() => {
+    if (isOpenModal) document.body.style.paddingRight = "0px";
+  }, [isOpenModal])
 
   const closeSelect = (evt) => {
     if (evt.target.id === "isOpenSelect") return;
@@ -53,32 +59,35 @@ const Profile = () => {
   }
   // What we can talk about section Edit display
   const talkAboutDisplay = () => {
+    if (!isEditMode) return;
     setIsTalkEdit(true)
   }
   // What we can talk about section Edit display
   const hideSaveForm = () => {
     setIsTalkEdit(false)
   }
+  // select option show or hide
   const isShowHide = () => {
     setIsOpenSelect(!isOpenSelect)
   }
+  // select option value set
   const handleChange = (val) => {
     setSelectVal(val)
-    // setIsOpenSelect(false)
   }
+  // color pick value set
   const colorChange = (val) => {
     setColorVal(val)
   }
 
   return (
     <div
-      className={!isTalkEdit ? "container-fluid" : "container-fluid bg-low"}
+      className="container-fluid"
       style={{
         backgroundImage: !isEditMode ? `url(${BackgroundImg})` : null,
         backgroundSize: "cover",
         height: "100%",
         width: "100%",
-        backgroundColor: !isTalkEdit ? '#15202B' : 'rgb(0,0,0, 0.8)'
+        backgroundColor: '#15202B'
       }}
     >
       {/* prfile-photo-title-bar */}
@@ -92,14 +101,14 @@ const Profile = () => {
         <div className="col-lg-7">
           <div className="ml-3 border border-dark">
             <div className="row py-2 mx-4 py-4">
-              <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg hidden-sm bg-item">
+              <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg">
                 <img src={Logo} alt="siteLogo" />
               </div>
             </div>
             {/* section1 */}
-            <div className="border-bottom border-dark photo-section bg-item">
+            <div className="border-bottom border-dark photo-section">
               <div className="row py-2 mx-4">
-                <div className="col-lg-5">
+                <div className="col-lg-5 mb-2">
                   <div className={isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
                     {
                       isEditMode ?
@@ -123,7 +132,7 @@ const Profile = () => {
                     <img src={ProfileImg} alt="profile" className="w-100" />
                   </div>
                 </div>
-                <div className="col-lg-7">
+                <div className="col-lg-7 mb-2">
                   <h2 className={isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
                   <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
                   <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
@@ -147,26 +156,29 @@ const Profile = () => {
                   }
                   {
                     isEditMode && isTalkEdit &&
-                    <div className="talk-about-edit">
-                      <div className="position-relative">
-                        <button onClick={hideSaveForm} className="btn-save-edit-mode">Save</button>
-                        <div className="title">
-                          <input type="text" name="title" autoFocus={true} placeholder="What we can talk about" />
-                          <span>Maximum 40 characters per Dept</span>
+                    <>
+                      <div className="talk-about-edit">
+                        <div className="position-relative">
+                          <button onClick={hideSaveForm} className="btn-save-edit-mode">Save</button>
+                          <div className="title">
+                            <input type="text" name="title" autoFocus={true} placeholder="What we can talk about" />
+                            <span>Maximum 40 characters per Dept</span>
+                          </div>
+                          <ol className="list-content mt-3">
+                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                          </ol>
                         </div>
-                        <ol className="list-content mt-3">
-                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                          <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                        </ol>
                       </div>
-                    </div>
+                      <div className="layout" onClick={hideSaveForm}></div>
+                    </>
                   }
                 </div>
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section pt-4 bg-item">
+            <div className="profile-info-section pt-4">
               <div className={isEditMode ? ' row py-2 dashed-border extra-style' : 'row py-2 mx-4'}>
                 <div className="col-lg-4 mb-3">
                   <h1>Company</h1>
@@ -188,14 +200,14 @@ const Profile = () => {
                 </div>
                 <div className="col-lg-4 mb-3">
                   <h1>Office number</h1>
-                  <a href="#">03330 067 123</a>
+                  <a href="#phone">03330 067 123</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         {/* section4 */}
-        <div className="col-lg-5 qoutes-section px-4 bg-item">
+        <div className="col-lg-5 qoutes-section px-4">
           <div>
             <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
           </div>
@@ -218,7 +230,7 @@ const Profile = () => {
       {/* open Edit Menu */}
       {
         !isEditMode ?
-          <div className="open-edit-menu bg-item">
+          <div className="open-edit-menu">
             {
               isOpenMenu ?
                 <div className="expanded-menu">
@@ -239,7 +251,7 @@ const Profile = () => {
             </div>
           </div> :
           // open Close menu bar
-          <div className="open-close-menu bg-item">
+          <div className="open-close-menu">
             {
               isCloseMenu ?
                 <div className="expanded-menu">
@@ -269,7 +281,7 @@ const Profile = () => {
                     </div>
                     <div className="dashed-border p-1">
                       {colorVal}
-                </div>
+                    </div>
                   </div>
                 </div> : null
             }
@@ -282,7 +294,7 @@ const Profile = () => {
             </div>
           </div>}
       {/* modal */}
-      <Modal show={isOpenModal} onHide={hideModal} className="register">
+      <Modal show={isOpenModal} onHide={hideModal} className="register" animation={false}>
         <Modal.Body>
           <div className="close-icon">
             <img src={CloseIcon} onClick={hideModal} alt="closeIcon" />

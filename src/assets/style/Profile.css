@@ -6,9 +6,6 @@
     padding: 10px;
     border-radius: 5px;
 }
-.bg-low .bg-item {
-    opacity: 0.5;
-}
 .photo-dashed-border {
     border: 2px dashed #343a40;
     border-radius: 30px;
@@ -87,6 +84,16 @@
     border: 2px dashed #343a40;
     padding: 10px;
     border-radius: 5px;
+    z-index: 999;
+}
+.talk-about-section .layout {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 900;
 }
 .talk-about-edit .title {
     margin-left: 30px;
@@ -189,7 +196,7 @@
 .open-edit-menu, .open-close-menu {
     position: fixed;
     right: 0px;
-    z-index: 999;
+    z-index: 100;
     bottom: 0px;
     background-color: #15202b;
     box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -233,6 +240,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.open-close-menu .color-picker>div {
+    transition: all 0.3s linear;
 }
 /* open-close-menu-bar */
 .open-close-menu .open-menu {
@@ -296,7 +306,7 @@
     height: 30px;
 }
 /* modal */
-.register.show .modal-dialog {
+.register .modal-dialog {
     max-width: 839px;
     top: 27px;
 }
@@ -351,5 +361,38 @@
 @media (max-width:576px) {
     .register .modal-body {
         padding: 15px !important;
+    }
+    .talk-about-edit .title {
+        margin-left: 5px;
+        padding-top: 36px;
+    }
+    .talk-about-edit .title input {
+        font-size: 23px;
+    }
+    .photo-section .photo-detail {
+        padding: 6px;
+        border-radius: 0px 0px 17px 17px;
+    }
+    .profile-photo-title-bar {
+        left: -128.71px;
+    }
+    .photo-detail p {
+        font-size: 16px;
+    }
+    .photo-detail p:last-child {
+        font-size: 14px;
+    }
+    .photo-detail p:last-child {
+        font-size: 14px;
+    }
+    .qoutes-section {
+        padding-bottom: 100px;
+    }
+    .photo-section .add-photo .add-your-img {
+        font-size: 22px;
+    }
+    .photo-section .add-photo {
+        top: 60px;
+        left: 12px;
     }
 }
