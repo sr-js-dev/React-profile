@@ -99,16 +99,16 @@ const Profile = () => {
       }
       <div className="row">
         <div className="col-lg-7">
-          <div className="ml-3 border border-dark">
-            <div className="row py-2 mx-4 py-4">
-              <div className="col-lg-9 col-md-6 col-sm-7  pl-4 logo-lg">
+          <div className={isEditMode ? 'dashed-first-section' : 'first-section'}>
+            <div className="row py-2 mx-3 py-4">
+              <div className="col-lg-9 col-md-6 col-sm-7 logo-lg">
                 <img src={Logo} alt="siteLogo" />
               </div>
             </div>
             {/* section1 */}
-            <div className="border-bottom border-dark photo-section">
-              <div className="row py-2 mx-4">
-                <div className="col-lg-5 mb-2">
+            <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
+              <div className="row mx-3">
+                <div className="col-lg-5 photo-part">
                   <div className={isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
                     {
                       isEditMode ?
@@ -137,7 +137,7 @@ const Profile = () => {
                   <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
                   <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
                     <span>Contact me on similar subject now</span>
-                    <span className="ml-3">
+                    <span className="m-left-8">
                       <img src={Vector} alt="Vector" />
                     </span>
                   </p>
@@ -145,9 +145,9 @@ const Profile = () => {
               </div>
             </div>
             {/* section2 */}
-            <div className="talk-about-section border-bottom border-dark">
-              <div className={isTalkEdit ? 'row extra-style' : 'row py-2 mx-4'}>
-                <div className="col-lg-12 mt-4 mb-3 position-relative">
+            <div className={isEditMode ? 'talk-about-section dashed-border-bottom' : 'talk-about-section solid-border-bottom'}>
+              <div className={isTalkEdit ? 'row extra-style' : 'row mx-3'}>
+                <div className="col-lg-12 position-relative">
                   <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>What we can talk about</h2>
                   {
                     talkAbout && talkAbout.map((item, i) => (
@@ -178,27 +178,27 @@ const Profile = () => {
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section pt-4">
-              <div className={isEditMode ? ' row py-2 dashed-border extra-style' : 'row py-2 mx-4'}>
-                <div className="col-lg-4 mb-3">
+            <div className="profile-info-section">
+              <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
+                <div className="col-lg-4">
                   <h1>Company</h1>
                   <p className="mb-0">OnTheGo Accountants</p>
                 </div>
-                <div className="col-lg-4 mb-3">
+                <div className="col-lg-4">
                   <h1>Department</h1>
                   <p className="mb-0">Tech & Growth</p>
                 </div>
-                <div className="col-lg-4 mb-3">
+                <div className="col-lg-4">
                   <h1>Location</h1>
                   <p className="mb-0">Birmingham</p>
                 </div>
-                <div className="col-lg-4 mb-3">
+                <div className="col-lg-4">
                   <h1>Address</h1>
                   <p className="mb-0">The Colmore Building</p>
                   <p className="mb-0">20 Colmore Circus Queensway</p>
                   <p className="mb-0">Birmingham, B4 6AT</p>
                 </div>
-                <div className="col-lg-4 mb-3">
+                <div className="col-lg-4">
                   <h1>Office number</h1>
                   <a href="#phone">03330 067 123</a>
                 </div>
@@ -300,13 +300,13 @@ const Profile = () => {
             <img src={CloseIcon} onClick={hideModal} alt="closeIcon" />
           </div>
           <div className="content">
-            <p className="font-weight-bold mb-4">To: Omar Faruq</p>
-            <p className="mb-4">My name is <span className="profile-detail">Jane Smith</span>.</p>
-            <p className="mb-4">I work at <span className="profile-detail">Company</span>; we have around <span className="profile-detail">xx employees</span>.</p>
-            <p className="mb-4">My phone number is <span className="profile-detail">+XX-X-XXX-XXXX</span>, and my work email is <span className="profile-detail">jane.smith@company.com</span>.</p>
-            <p className="mb-4">I will like to discuss this  <span className="discuss-content">“I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></p>
+            <p className="font-weight-bold title">To: Omar Faruq</p>
+            <p className="txt">My name is <span className="profile-detail">Jane Smith</span>.</p>
+            <p className="txt">I work at <span className="profile-detail">Company</span>; we have around <span className="profile-detail">xx employees</span>.</p>
+            <p className="txt">My phone number is <span className="profile-detail">+XX-X-XXX-XXXX</span>, and my work email is <span className="profile-detail">jane.smith@company.com</span>.</p>
+            <p className="txt">I will like to discuss this  <span className="discuss-content">“I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></p>
           </div>
-          <div className="send-btn-part d-flex justify-content-around align-items-center w-100 mt-5">
+          <div className="send-btn-part d-flex justify-content-around align-items-center w-100">
             <button className="btn-send font-weight-bold">Send</button>
           </div>
         </Modal.Body>
@@ -318,13 +318,13 @@ const Profile = () => {
 // talk about content
 function TalkAboutParagraph(txt, id, mode) {
   return (
-    <div className={mode ? 'd-flex mt-3 dashed-border' : 'd-flex mt-3'} key={id}>
+    <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
       <div>
-        <img src={List} alt="List" />
+        <img src={List} alt="List" className="list-img" />
       </div>
-      <div className="description ml-3">
+      <div className="description" style={{marginLeft: '11.5px'}}>
         <span>{txt}</span>
-        <span className="ml-3">
+        <span className="m-left-8">
           <img src={Vector} alt="Vector" />
         </span>
       </div>

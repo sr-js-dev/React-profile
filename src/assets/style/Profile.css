@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 .photo-section, .talk-about-section, .qoutes-section {
     color: #FFFFFF;
 }
@@ -6,10 +7,35 @@
     padding: 10px;
     border-radius: 5px;
 }
+.dashed-border-bottom {
+    border-bottom: 2px dashed #343a40;
+}
+.solid-border-bottom {
+    border-bottom: 1px solid #343a40;
+}
+.m-left-8 {
+    margin-left: 8px;
+}
+.first-section {
+    margin-left: 7px;
+    border-left: 1px solid #343a40;
+    border-right: 1px solid #343a40;
+}
+.dashed-first-section {
+    margin-left: 7px;
+    border-left: 2px dashed #343a40;
+    border-right: 2px dashed #343a40;
+}
 .photo-dashed-border {
     border: 2px dashed #343a40;
     border-radius: 30px;
     overflow: hidden;
+}
+.photo-section .photo-part {
+    margin-bottom: 35px;
+}
+.photo-section>div {
+    margin-top: 10px;
 }
 .photo-section .layout {
     position: absolute;
@@ -27,16 +53,20 @@
     left: 0px;
     background-color: #FFFFFF;
     width: 100%;
-    padding: 10px;
-    border-radius: 0px 0px 30px 30px;
+    padding: 15px 10px 10px 10px;
+    border-radius: 0px 0px 18px 18px;
 }
 .photo-detail p {
     color: #15202B;
-    font-size: 20px;
-    margin-bottom: 0px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 10px;
 }
 .photo-detail p:last-child {
-    font-size: 17px;
+    font-size: 15px;
+    line-height: 10px;
 }
 .custom-bg-color {
     background-color: #343535 !important;
@@ -51,7 +81,7 @@
 }
 .photo-section .add-photo .add-your-img {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
     color: darkgray;
 }
 .photo-section .add-photo .img-size {
@@ -67,11 +97,20 @@
     font-size: 20px;
     cursor: pointer;
 }
+.talk-about-section>div>div {
+    margin-top: 30px;
+    margin-bottom: 32px;
+}
 .talk-about-section .title{
     font-size: 32px;
+    font-family: Open Sans;
 }
 .talk-about-section .description {
     font-size: 20px;
+    font-family: Open Sans;
+}
+.talk-about-section .talk-txt {
+    margin-top: 25px;
 }
 .talk-about-section .talk-about-edit {
     position: absolute;
@@ -132,6 +171,11 @@
 .profile-info-section {
     color: #FFFFFF;
     padding-bottom: 100px;
+    padding-top: 17px;
+}
+.profile-info-section .col-lg-4 {
+    margin-top: 17px;
+    margin-bottom: 17px;
 }
 .profile-info-section h1 {
     font-size: 32px;
@@ -149,24 +193,32 @@
     text-decoration: underline;
 }
 .qoutes-section {
-    padding-top: 95px;
+    padding-top: 100px;
 }
 .qoutes-section .title {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
     font-size: 20px;
+    line-height: 27px;
 }
 .qoutes-section .content {
+    font-family: Open Sans;
+    font-weight: bold;
     font-size: 18px;
+    line-height: 34px;
 }
 .qoutes-section .emphases {
     background-color: #CFF2EE;
     color: #15202b;
+    padding: 3px;
 }
 .profile-photo-title-bar {
     position: fixed;
     width: 681.87px;
-    height: 50px;
-    left: -60.71px;
-    top: 117.72px;
+    height: 45px;
+    left: -134.71px;
+    top: 99.72px;
     background: #39444D;
     transform: rotate(-30deg);
     display: flex;
@@ -177,20 +229,25 @@
 }
 .profile-photo-title-bar p.title {
     margin-bottom: 0px;
-    font-size: 33px;
+    font-size: 32px;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 60px;
+    font-family: Oswald;
+    font-style: normal;
 }
 .profile-photo-title-bar .percent {
     font-size: 20px;
     font-weight: normal;
+    font-family: Oswald;
 }
 .profile-photo-title-bar .undeited {
     color: #C95355;
     font-size: 20px;
     margin-left: 5px;
+    font-family: Oswald;
 }
 /* open-edit-menu-bar */
 .open-edit-menu, .open-close-menu {
@@ -317,6 +374,9 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px !important;
 }
+.register .modal-content .txt {
+    margin-top: 30px;
+}
 .register .modal-body {
     background-color: #15202B;
     padding: 60px !important;
@@ -332,12 +392,20 @@
 .register .modal-body .content {
     font-size: 27px;
 }
+.register .modal-body .content p {
+    font-weight: 600;
+    font-family: Open Sans;
+    line-height: 1.7
+}
 .register .modal-body .profile-detail {
     color: #39444D;
     text-decoration: underline;
 }
 .register .modal-body .discuss-content {
     color: #55ACEE;
+}
+.register .modal-body .send-btn-part {
+    margin-top: 67px;
 }
 .register .modal-body .btn-send {
     background: #FFFFFF;
@@ -354,6 +422,12 @@
     background-color:#55ACEE;
     color: #FFFFFF;
 }
+.modal-backdrop.show {
+    opacity: 0.3 !important;
+}
+.modal-backdrop {
+    background-color: #FFF !important;
+}
 .cursor-pointer {
     cursor: pointer;
 }
@@ -361,6 +435,10 @@
 @media (max-width:576px) {
     .register .modal-body {
         padding: 15px !important;
+    }
+    .first-section, .dashed-first-section {
+        margin-left: 0px;
+        border: none;
     }
     .talk-about-edit .title {
         margin-left: 5px;
@@ -370,14 +448,14 @@
         font-size: 23px;
     }
     .photo-section .photo-detail {
-        padding: 6px;
+        padding: 15px 6px 6px 6px;
         border-radius: 0px 0px 17px 17px;
     }
     .profile-photo-title-bar {
-        left: -128.71px;
+        left: -161.71px;
     }
     .photo-detail p {
-        font-size: 16px;
+        font-size: 18px;
     }
     .photo-detail p:last-child {
         font-size: 14px;
@@ -394,5 +472,17 @@
     .photo-section .add-photo {
         top: 60px;
         left: 12px;
+    }
+    .open-edit-menu>div, .open-close-menu>div,.open-edit-menu, .open-close-menu {
+        width: 100% !important;
+    }
+    .profile-photo-title-bar p.title {
+        font-size: 26px;
+    }
+    .profile-photo-title-bar .percent {
+        font-size: 18px;
+    }
+    .profile-photo-title-bar .undeited {
+        font-size: 18px;
     }
 }
