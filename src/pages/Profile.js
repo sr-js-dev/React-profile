@@ -150,13 +150,17 @@ const Profile = () => {
                     <>
                       <div className="contact-edit">
                         <button onClick={contactSave} className="btn-save-edit-mode">Save</button>
-                        <div className="title">
-                            <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Why you should contact me" />
+                        <div className="title block">
                             <span className="require-txt">Title: Maximum 21 characters</span>
+                            <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Why you should contact me" />
                         </div>
-                        <div>
-                          <textarea placeholder="I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead." className="common-textarea" />
+                        <div className="block content">
                           <span className="require-txt">Message: Maximum 240 characters</span>
+                          <textarea row="2" placeholder="I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead." className="common-textarea" />
+                        </div>
+                        <div className="block content">
+                          <span className="require-txt">Title: Maximum 21 characters</span>
+                          <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Contact me on similar subject matter" />
                         </div>
                       </div>
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
