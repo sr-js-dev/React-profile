@@ -9,7 +9,7 @@ export const TalkAboutData = [
   },
   {
     "id": "3",
-    "content": "Talk about how our firm has transformed businesses in your industry. "
+    "content": "Talk about how our firm has transformed businesses in your industry."
   }
 ];
 

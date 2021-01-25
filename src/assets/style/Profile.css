@@ -7,11 +7,40 @@
     padding: 10px;
     border-radius: 5px;
 }
+.layout {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 900;
+}
 .dashed-border-bottom {
     border-bottom: 2px dashed #343a40;
 }
 .dashed-border-top {
     border-top: 2px dashed #343a40;
+}
+.email-icon {
+    margin-bottom: 7px;
+}
+.common-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    color: white;
+}
+.common-textarea {
+    border: none;
+    background: transparent;
+    outline: none;
+    resize: none;
+    color: white;
+}
+.require-txt {
+    color: #FFFFFF;
+    font-size: 12px;
 }
 .mobile-view {
     display: none;
@@ -49,7 +78,7 @@
 .photo-section>div {
     margin-top: 10px;
 }
-.photo-section .layout {
+.photo-section .photo-layout {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -73,11 +102,18 @@
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
-    font-size: 28px;
+    font-size: 20px;
     margin-bottom: 0px;
 }
+.photo-img-section {
+    max-width: 312px;
+    width: 100%;
+}
+.profile-img {
+    width: 100%;
+}
 .photo-detail p:last-child {
-    font-size: 24px;
+    font-size: 17px;
     margin-bottom: 0px;
 }
 .custom-bg-color {
@@ -109,6 +145,28 @@
     font-size: 20px;
     cursor: pointer;
 }
+.contact-edit {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150%;
+    background: #15202B;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
+    border-top: 2px dashed #343a40;
+    margin-left: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 999;
+}
+.contact-edit .title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.contact-edit input {
+    font-size: 30px;
+    width: 380px;
+}
 .talk-about-section>div>div {
     margin-top: 30px;
     margin-bottom: 32px;
@@ -136,15 +194,6 @@
     padding: 10px;
     border-radius: 5px;
     z-index: 999;
-}
-.talk-about-section .layout {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 900;
 }
 .talk-about-edit .title {
     margin-left: 30px;
@@ -454,32 +503,25 @@
 }
 @media (max-width:1740px) {
     .photo-detail p {
-        font-size: 26px;
-    }
-    .photo-detail p:last-child {
-        font-size: 22px;
-    }
-}
-@media (max-width:1620px) {
-    .photo-detail p {
-        font-size: 22px;
-    }
-    .photo-detail p:last-child {
-        font-size: 19px;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 1620px) {
-    /* For portrait layouts only */
-  }
-@media (max-width:1437px) {
-    .photo-detail p {
         font-size: 20px;
     }
     .photo-detail p:last-child {
         font-size: 17px;
     }
 }
+@media (max-width:1437px) {
+    .photo-detail p {
+        font-size: 18px;
+    }
+    .photo-detail p:last-child {
+        font-size: 15px;
+    }
+}
 @media (max-width:768px) {
+    .photo-img-section {
+        max-width: 100%;
+        width: 100%;
+    }
     .photo-detail p {
         font-size: 43px;
     }
@@ -545,5 +587,18 @@
     }
     .qoutes-section {
         padding-top: 50px;
+    }
+    .contact-edit {
+        width: 100%;
+        padding-top: 50px;
+    }
+    .contact-edit .title {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .contact-edit input {
+        font-size: 23px;
+        width: 300px;
     }
 }

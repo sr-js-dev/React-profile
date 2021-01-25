@@ -3,7 +3,9 @@ import BackgroundImg from "../assets/img/bg-img2.png";
 import ProfileImg from "../assets/img/profileImg.png";
 import Logo from "../assets/img/Logo.svg";
 import Vector from "../assets/img/Vector.svg";
-import List from "../assets/img/List.svg";
+import List1 from "../assets/img/list-1.svg";
+import List2 from "../assets/img/list-2.svg"
+import List3 from "../assets/img/list-3.svg"
 import Menu1 from '../assets/img/menu1.svg'
 import CloseMenu from '../assets/img/CloseMenu.svg'
 import Attached from '../assets/img/attach.svg'
@@ -27,6 +29,7 @@ const Profile = () => {
   const [isOpenSelect, setIsOpenSelect] = useState(false)
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
+  const [isContactEdit, setIsContactEdit] = useState(false)
 
   // Talk About string get from dumy data
   useEffect(() => {
@@ -78,6 +81,15 @@ const Profile = () => {
   const colorChange = (val) => {
     setColorVal(val)
   }
+  // display contact me edit
+  const contactDisplay = () => {
+    if (!isEditMode) return;
+    setIsContactEdit(true)
+  }
+  // remove contact me edit
+  const contactSave = () => {
+    setIsContactEdit(false)
+  }
 
   return (
     <div
@@ -98,7 +110,7 @@ const Profile = () => {
           </div> : null
       }
       <div className="row">
-        <div className="col-lg-8">
+        <div className="col-lg-7">
           <div className={isEditMode ? 'dashed-first-section' : 'first-section'}>
             <div className="row py-2 mx-3 py-4">
               <div className="col-lg-9 col-md-6 col-sm-7 logo-lg">
@@ -109,11 +121,11 @@ const Profile = () => {
             <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
               <div className="row mx-3">
                 <div className="col-lg-5 photo-part">
-                  <div className={isEditMode ? 'photo-dashed-border position-relative' : 'position-relative'}>
+                  <div className={isEditMode ? 'photo-dashed-border position-relative photo-img-section' : 'position-relative photo-img-section'}>
                     {
                       isEditMode ?
                         <>
-                          <div className="layout"></div>
+                          <div className="photo-layout"></div>
                           <div className="add-photo d-flex align-items-center">
                             <div className="h-100">
                               <img src={PhotoAdd} alt="photoAdd" />
@@ -129,16 +141,33 @@ const Profile = () => {
                       <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>Omar Faruq BA (Hons), ACCA</p>
                       <p className={isEditMode ? 'text-white' : ''}>Client Partner - Tech & High Growth</p>
                     </div>
-                    <img src={ProfileImg} alt="profile" className="w-100" />
+                    <img src={ProfileImg} alt="profile" className="profile-img" />
                   </div>
                 </div>
-                <div className="col-lg-7 mb-2">
-                  <h2 className={isEditMode ? 'dashed-border title mb-4' : 'title mb-4'}>Why you should contact me</h2>
+                <div className="col-lg-7 mb-2 position-relative">
+                  {
+                    isEditMode && isContactEdit &&
+                    <>
+                      <div className="contact-edit">
+                        <button onClick={contactSave} className="btn-save-edit-mode">Save</button>
+                        <div className="title">
+                            <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Why you should contact me" />
+                            <span className="require-txt">Title: Maximum 21 characters</span>
+                        </div>
+                        <div>
+                          <textarea placeholder="I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead." className="common-textarea" />
+                          <span className="require-txt">Message: Maximum 240 characters</span>
+                        </div>
+                      </div>
+                      <div className="layout" onClick={() => setIsContactEdit(false)}></div>
+                    </>
+                  }
+                  <h2 className={isEditMode ? 'dashed-border title mb-4 cursor-pointer' : 'title mb-4'} onClick={contactDisplay}>Why you should contact me</h2>
                   <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
                   <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
                     <span>Contact me on similar subject now</span>
                     <span className="m-left-8">
-                      <img src={Vector} alt="Vector" />
+                      <img src={Vector} className="email-icon" alt="Vector" />
                     </span>
                   </p>
                 </div>
@@ -166,8 +195,8 @@ const Profile = () => {
                           </div>
                           <ol className="list-content mt-3">
                             <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
+                            <li className="mb-3">Give you an expert and actionable insight and current trends in relation to your business and industry</li>
+                            <li className="mb-3">Talk about how our firm has transformed businesses in your industry.</li>
                           </ol>
                         </div>
                       </div>
@@ -207,11 +236,11 @@ const Profile = () => {
           </div>
         </div>
         {/* section4 */}
-        <div className="col-lg-4 qoutes-section px-4">
+        <div className="col-lg-5 qoutes-section px-4">
           <div>
             <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
           </div>
-          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'}>
+          <div className={isEditMode ? 'dashed-border' : ''}>
             <p className='content font-weight-bold'>“This is by far the best accounting service that I've ever used. A unique combination of quality,
             affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
             For our company (Eventera Ltd),
@@ -219,7 +248,7 @@ const Profile = () => {
             </p>
             <p className='title'>Petros Topouzis, Founder : eventera.io</p>
           </div>
-          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'}>
+          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'} style={{marginTop: '3rem'}}>
             <p className="content font-weight-bold">I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.
               <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
             </p>
@@ -350,12 +379,12 @@ function TalkAboutParagraph(txt, id, mode) {
   return (
     <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
       <div>
-        <img src={List} alt="List" className="list-img" />
+        <img src={id===0 ? List1: (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
       </div>
-      <div className="description" style={{marginLeft: '11.5px'}}>
+      <div className={mode ? 'description cursor-pointer' : 'description'} style={{marginLeft: '11.5px'}}>
         <span>{txt}</span>
         <span className="m-left-8">
-          <img src={Vector} alt="Vector" />
+          <img src={Vector} className="email-icon" alt="Vector" />
         </span>
       </div>
     </div>
