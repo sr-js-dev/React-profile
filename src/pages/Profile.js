@@ -178,7 +178,7 @@ const Profile = () => {
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section">
+            <div className="profile-info-section desktop-view">
               <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
                 <div className="col-lg-4">
                   <h1>Company</h1>
@@ -224,6 +224,33 @@ const Profile = () => {
               <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
             </p>
             <p className="title">Viswa, Founder</p>
+          </div>
+        </div>
+        {/* mobile view for section3 */}
+        <div className="profile-info-section mobile-view">
+          <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
+            <div className="col-lg-4">
+              <h1>Company</h1>
+              <p className="mb-0">OnTheGo Accountants</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Department</h1>
+              <p className="mb-0">Tech & Growth</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Location</h1>
+              <p className="mb-0">Birmingham</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Address</h1>
+              <p className="mb-0">The Colmore Building</p>
+              <p className="mb-0">20 Colmore Circus Queensway</p>
+              <p className="mb-0">Birmingham, B4 6AT</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Office number</h1>
+              <a href="#phone">03330 067 123</a>
+            </div>
           </div>
         </div>
       </div>
@@ -301,11 +328,13 @@ const Profile = () => {
           </div>
           <div className="content">
             <p className="font-weight-bold title">To: Omar Faruq</p>
-            <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{width: '135px'}} />.</div>
+            <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{width: '136px'}} />.</div>
             <div className="txt">I work at <input type="text" className="profile-detail" placeholder="Company" style={{width: '135px'}} />;
             we have around <input type="text" className="profile-detail" placeholder="xx employees" style={{width: '176px'}} />.</div>
-            <p className="txt">My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{width: '203px'}} />, and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{width: '337px'}} />.</p>
-            <p className="txt">I will like to discuss this  <span className="discuss-content">“I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></p>
+            <div className="txt">My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{width: '203px'}} />,
+            and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{width: '337px'}} />.</div>
+            <div className="txt">I will like to discuss this  <span className="discuss-content">
+            “I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></div>
           </div>
           <div className="send-btn-part d-flex justify-content-around align-items-center w-100">
             <button className="btn-send font-weight-bold">Send</button>

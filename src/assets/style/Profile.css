@@ -10,8 +10,20 @@
 .dashed-border-bottom {
     border-bottom: 2px dashed #343a40;
 }
+.dashed-border-top {
+    border-top: 2px dashed #343a40;
+}
+.mobile-view {
+    display: none;
+}
+.desktop-view {
+    display: block;
+}
 .solid-border-bottom {
     border-bottom: 1px solid #343a40;
+}
+.solid-border-top {
+    border-top: 1px solid #343a40;
 }
 .m-left-8 {
     margin-left: 8px;
@@ -396,8 +408,7 @@
     line-height: 1.7;
 }
 .register .modal-body .profile-detail {
-    color: #757575;
-    text-decoration: underline;
+    color: #FFFFFF;
     background: transparent;
     border: none;
     outline: none;
@@ -477,6 +488,12 @@
     }
 }
 @media (max-width:576px) {
+    .mobile-view {
+        display: block;
+    }
+    .desktop-view {
+        display: none;
+    }
     .register .modal-body {
         padding: 15px !important;
     }
@@ -525,5 +542,8 @@
     }
     .profile-photo-title-bar .undeited {
         font-size: 18px;
+    }
+    .qoutes-section {
+        padding-top: 50px;
     }
 }
