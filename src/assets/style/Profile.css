@@ -170,7 +170,7 @@
 .contact-edit .content {
     margin-top: 25px;
 }
-.contact-edit .block textarea, .contact-edit .block input{
+.contact-edit .content textarea, .contact-edit .content input{
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;

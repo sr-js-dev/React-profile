@@ -30,7 +30,7 @@ const Profile = () => {
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
   const [isContactEdit, setIsContactEdit] = useState(false)
-
+  const [contactVal, setContactVal] = useState({title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter'})
   // Talk About string get from dumy data
   useEffect(() => {
     if (TalkAboutData.length > 0) {
@@ -86,9 +86,15 @@ const Profile = () => {
     if (!isEditMode) return;
     setIsContactEdit(true)
   }
-  // remove contact me edit
-  const contactSave = () => {
+  // contact value change
+  const contactChange = (evt) => {
     setIsContactEdit(false)
+    evt.preventDefault();
+    const data = new FormData(evt.target);
+    const _title = data.get('title') || contactVal.title
+    const _msg = data.get('msg') || contactVal.msg
+    const _emailMsg = data.get('emailMsg') || contactVal.emailMsg
+    setContactVal({title: _title, msg: _msg, emailMsg: _emailMsg})
   }
 
   return (
@@ -148,28 +154,28 @@ const Profile = () => {
                   {
                     isEditMode && isContactEdit &&
                     <>
-                      <div className="contact-edit">
-                        <button onClick={contactSave} className="btn-save-edit-mode">Save</button>
+                      <form className="contact-edit" onSubmit={contactChange}>
+                        <button className="btn-save-edit-mode">Save</button>
                         <div className="title block">
                             <span className="require-txt">Title: Maximum 21 characters</span>
-                            <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Why you should contact me" />
+                            <input type="text" className="common-input" name="title" autoComplete="off" placeholder={contactVal.title} autoFocus={true} maxLength="21" />
                         </div>
                         <div className="block content">
                           <span className="require-txt">Message: Maximum 240 characters</span>
-                          <textarea row="2" placeholder="I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead." className="common-textarea" />
+                          <textarea row="2" maxLength="240" placeholder={contactVal.msg} name="msg" autoComplete="off" className="common-textarea" />
                         </div>
                         <div className="block content">
-                          <span className="require-txt">Title: Maximum 21 characters</span>
-                          <input type="text" className="common-input" autoFocus={true} maxLength="21" placeholder="Contact me on similar subject matter" />
+                          <span className="require-txt">Email Message: Maximum 31 characters</span>
+                          <input type="text" className="common-input"  maxLength="31" name="emailMsg" autoComplete="off" placeholder={contactVal.emailMsg} />
                         </div>
-                      </div>
+                      </form>
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
                     </>
                   }
-                  <h2 className={isEditMode ? 'dashed-border title mb-4 cursor-pointer' : 'title mb-4'} onClick={contactDisplay}>Why you should contact me</h2>
-                  <p className={isEditMode ? 'dashed-border description' : 'description'}>I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.</p>
+                  <h2 className={isEditMode ? 'dashed-border title mb-4 cursor-pointer' : 'title mb-4'} onClick={contactDisplay}>{contactVal.title}</h2>
+                  <p className={isEditMode ? 'dashed-border description' : 'description'}>{contactVal.msg}</p>
                   <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
-                    <span>Contact me on similar subject now</span>
+                    <span>{contactVal.emailMsg}</span>
                     <span className="m-left-8">
                       <img src={Vector} className="email-icon" alt="Vector" />
                     </span>
