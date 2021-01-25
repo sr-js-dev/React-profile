@@ -98,7 +98,7 @@ const Profile = () => {
           </div> : null
       }
       <div className="row">
-        <div className="col-lg-7">
+        <div className="col-lg-8">
           <div className={isEditMode ? 'dashed-first-section' : 'first-section'}>
             <div className="row py-2 mx-3 py-4">
               <div className="col-lg-9 col-md-6 col-sm-7 logo-lg">
@@ -126,8 +126,8 @@ const Profile = () => {
                         </> : null
                     }
                     <div className={isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
-                      <p className={isEditMode ? 'text-white font-weight-bold text-center' : 'font-weight-bold text-center'}>Omar Faruq BA (Hons), ACCA</p>
-                      <p className={isEditMode ? 'text-white text-center' : 'text-center'}>Client Partner - Tech & High Growth</p>
+                      <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>Omar Faruq BA (Hons), ACCA</p>
+                      <p className={isEditMode ? 'text-white' : ''}>Client Partner - Tech & High Growth</p>
                     </div>
                     <img src={ProfileImg} alt="profile" className="w-100" />
                   </div>
@@ -207,7 +207,7 @@ const Profile = () => {
           </div>
         </div>
         {/* section4 */}
-        <div className="col-lg-5 qoutes-section px-4">
+        <div className="col-lg-4 qoutes-section px-4">
           <div>
             <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
           </div>

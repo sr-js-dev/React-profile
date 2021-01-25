@@ -61,11 +61,11 @@
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
-    font-size: 23px;
+    font-size: 28px;
     margin-bottom: 0px;
 }
 .photo-detail p:last-child {
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 0px;
 }
 .custom-bg-color {
@@ -432,12 +432,39 @@
     cursor: pointer;
 }
 
-@media (max-width:1437px) {
+@media (max-width:1740px) {
     .photo-detail p {
-        font-size: 19px;
+        font-size: 26px;
     }
     .photo-detail p:last-child {
-        font-size: 15px;
+        font-size: 22px;
+    }
+}
+@media (max-width:1620px) {
+    .photo-detail p {
+        font-size: 22px;
+    }
+    .photo-detail p:last-child {
+        font-size: 19px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1620px) {
+    /* For portrait layouts only */
+  }
+@media (max-width:1437px) {
+    .photo-detail p {
+        font-size: 20px;
+    }
+    .photo-detail p:last-child {
+        font-size: 17px;
+    }
+}
+@media (max-width:768px) {
+    .photo-detail p {
+        font-size: 43px;
+    }
+    .photo-detail p:last-child {
+        font-size: 36px;
     }
 }
 @media (max-width:576px) {
@@ -466,10 +493,7 @@
         font-size: 18px;
     }
     .photo-detail p:last-child {
-        font-size: 14px;
-    }
-    .photo-detail p:last-child {
-        font-size: 14px;
+        font-size: 15px;
     }
     .qoutes-section {
         padding-bottom: 100px;
