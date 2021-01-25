@@ -301,9 +301,10 @@ const Profile = () => {
           </div>
           <div className="content">
             <p className="font-weight-bold title">To: Omar Faruq</p>
-            <p className="txt">My name is <span className="profile-detail">Jane Smith</span>.</p>
-            <p className="txt">I work at <span className="profile-detail">Company</span>; we have around <span className="profile-detail">xx employees</span>.</p>
-            <p className="txt">My phone number is <span className="profile-detail">+XX-X-XXX-XXXX</span>, and my work email is <span className="profile-detail">jane.smith@company.com</span>.</p>
+            <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{width: '135px'}} />.</div>
+            <div className="txt">I work at <input type="text" className="profile-detail" placeholder="Company" style={{width: '135px'}} />;
+            we have around <input type="text" className="profile-detail" placeholder="xx employees" style={{width: '176px'}} />.</div>
+            <p className="txt">My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{width: '203px'}} />, and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{width: '337px'}} />.</p>
             <p className="txt">I will like to discuss this  <span className="discuss-content">“I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></p>
           </div>
           <div className="send-btn-part d-flex justify-content-around align-items-center w-100">

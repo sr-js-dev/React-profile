@@ -374,9 +374,6 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px !important;
 }
-.register .modal-content .txt {
-    margin-top: 30px;
-}
 .register .modal-body {
     background-color: #15202B;
     padding: 60px !important;
@@ -392,14 +389,18 @@
 .register .modal-body .content {
     font-size: 27px;
 }
-.register .modal-body .content p {
+.register .modal-body .content .txt {
+    margin-top: 30px;
     font-weight: 600;
     font-family: Open Sans;
-    line-height: 1.7
+    line-height: 1.7;
 }
 .register .modal-body .profile-detail {
-    color: #39444D;
+    color: #757575;
     text-decoration: underline;
+    background: transparent;
+    border: none;
+    outline: none;
 }
 .register .modal-body .discuss-content {
     color: #55ACEE;
@@ -431,7 +432,15 @@
 .cursor-pointer {
     cursor: pointer;
 }
-
+.profile-detail::-webkit-input-placeholder { /* Edge */
+    text-decoration: underline;
+}
+.profile-detail:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    text-decoration: underline;
+}
+.profile-detail::placeholder {
+    text-decoration: underline;
+}
 @media (max-width:1740px) {
     .photo-detail p {
         font-size: 26px;
