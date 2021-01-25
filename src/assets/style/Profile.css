@@ -53,7 +53,7 @@
     left: 0px;
     background-color: #FFFFFF;
     width: 100%;
-    padding: 15px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     border-radius: 0px 0px 18px 18px;
 }
 .photo-detail p {
@@ -61,12 +61,12 @@
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
-    font-size: 19px;
-    line-height: 10px;
+    font-size: 23px;
+    margin-bottom: 0px;
 }
 .photo-detail p:last-child {
-    font-size: 15px;
-    line-height: 10px;
+    font-size: 18px;
+    margin-bottom: 0px;
 }
 .custom-bg-color {
     background-color: #343535 !important;
@@ -432,6 +432,14 @@
     cursor: pointer;
 }
 
+@media (max-width:1437px) {
+    .photo-detail p {
+        font-size: 19px;
+    }
+    .photo-detail p:last-child {
+        font-size: 15px;
+    }
+}
 @media (max-width:576px) {
     .register .modal-body {
         padding: 15px !important;
@@ -448,7 +456,7 @@
         font-size: 23px;
     }
     .photo-section .photo-detail {
-        padding: 15px 6px 6px 6px;
+        padding: 6px 6px 6px 6px;
         border-radius: 0px 0px 17px 17px;
     }
     .profile-photo-title-bar {
@@ -470,7 +478,7 @@
         font-size: 22px;
     }
     .photo-section .add-photo {
-        top: 60px;
+        top: 80px;
         left: 12px;
     }
     .open-edit-menu>div, .open-close-menu>div,.open-edit-menu, .open-close-menu {
