@@ -15,13 +15,13 @@ import PhotoAdd from '../assets/img/photoAdd.svg'
 import Arrow from '../assets/img/arrow.svg'
 import Modal from "react-bootstrap/Modal";
 import EditModal from '../components/EditModal'
+import EmailListEdit from '../components/EmailListEdit'
 // style
 import "../assets/style/Profile.css";
 // dumy data
-import { TalkAboutData, ThemeMode } from '../dumy/data'
+import { ThemeMode, TalkAboutData } from '../dumy/data'
 
 const Profile = () => {
-  const [talkAbout, setTalkAbout] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false)
@@ -31,6 +31,7 @@ const Profile = () => {
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
   const [isContactEdit, setIsContactEdit] = useState(false)
+  const [talkAboutEdit, setTalkAboutEdit] = useState({ title: '', emailList: [] })
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
   const [contactEditModal, setContactEditModal] = useState({
     open: false,
@@ -45,9 +46,7 @@ const Profile = () => {
   })
   // Talk About string get from dumy data
   useEffect(() => {
-    if (TalkAboutData.length > 0) {
-      setTalkAbout(TalkAboutData)
-    }
+    setTalkAboutEdit(TalkAboutData)
   }, [])
 
   // select option hide event
@@ -200,29 +199,16 @@ const Profile = () => {
             <div className={isEditMode ? 'talk-about-section dashed-border-bottom' : 'talk-about-section solid-border-bottom'}>
               <div className={isTalkEdit ? 'row extra-style' : 'row mx-3'}>
                 <div className="col-lg-12 position-relative">
-                  <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>What we can talk about</h2>
+                  <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>{talkAboutEdit['title']}</h2>
                   {
-                    talkAbout && talkAbout.map((item, i) => (
-                      TalkAboutParagraph(item.content, i, isEditMode)
+                    talkAboutEdit['content'] && talkAboutEdit['content'].length > 0 && talkAboutEdit['content'].map((item, i) => (
+                      TalkAboutParagraph(item, i, isEditMode)
                     ))
                   }
                   {
                     isEditMode && isTalkEdit &&
                     <>
-                      <div className="talk-about-edit">
-                        <div className="position-relative">
-                          <button onClick={hideSaveForm} className="btn-save-edit-mode">Save</button>
-                          <div className="title">
-                            <input type="text" name="title" autoFocus={true} placeholder="What we can talk about" />
-                            <span>Maximum 40 characters per Dept</span>
-                          </div>
-                          <ol className="list-content mt-3">
-                            <li className="mb-3">Talk about your company’s goals and find out how our firm services can help boost your business</li>
-                            <li className="mb-3">Give you an expert and actionable insight and current trends in relation to your business and industry</li>
-                            <li className="mb-3">Talk about how our firm has transformed businesses in your industry.</li>
-                          </ol>
-                        </div>
-                      </div>
+                      <EmailListEdit setIsTalkEdit={setIsTalkEdit} talkAboutEdit={talkAboutEdit} setTalkAboutEdit={setTalkAboutEdit} />
                       <div className="layout" onClick={hideSaveForm}></div>
                     </>
                   }
