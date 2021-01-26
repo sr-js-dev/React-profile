@@ -14,6 +14,7 @@ import ThemeIcon from '../assets/img/Theme.svg'
 import PhotoAdd from '../assets/img/photoAdd.svg'
 import Arrow from '../assets/img/arrow.svg'
 import Modal from "react-bootstrap/Modal";
+import EditModal from '../components/EditModal'
 // style
 import "../assets/style/Profile.css";
 // dumy data
@@ -30,7 +31,18 @@ const Profile = () => {
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
   const [isContactEdit, setIsContactEdit] = useState(false)
-  const [contactVal, setContactVal] = useState({title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter'})
+  const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
+  const [contactEditModal, setContactEditModal] = useState({
+    open: false,
+    type: {
+      name: true,
+      companyName: true,
+      employeeNum: true,
+      position: true,
+      phoneNum: true,
+      email: true
+    }
+  })
   // Talk About string get from dumy data
   useEffect(() => {
     if (TalkAboutData.length > 0) {
@@ -54,7 +66,8 @@ const Profile = () => {
   }
   // modal show
   const showModal = () => {
-    setIsOpenModal(true);
+    if (!isEditMode) setIsOpenModal(true);
+    else setContactEditModal({ ...contactEditModal, open: true })
   };
   // modal hide
   const hideModal = () => {
@@ -94,7 +107,7 @@ const Profile = () => {
     const _title = data.get('title') || contactVal.title
     const _msg = data.get('msg') || contactVal.msg
     const _emailMsg = data.get('emailMsg') || contactVal.emailMsg
-    setContactVal({title: _title, msg: _msg, emailMsg: _emailMsg})
+    setContactVal({ title: _title, msg: _msg, emailMsg: _emailMsg })
   }
 
   return (
@@ -157,8 +170,8 @@ const Profile = () => {
                       <form className="contact-edit" onSubmit={contactChange}>
                         <button className="btn-save-edit-mode">Save</button>
                         <div className="title block">
-                            <span className="require-txt">Title: Maximum 21 characters</span>
-                            <input type="text" className="common-input" name="title" autoComplete="off" placeholder={contactVal.title} autoFocus={true} maxLength="21" />
+                          <span className="require-txt">Title: Maximum 21 characters</span>
+                          <input type="text" className="common-input" name="title" autoComplete="off" placeholder={contactVal.title} autoFocus={true} maxLength="21" />
                         </div>
                         <div className="block content">
                           <span className="require-txt">Message: Maximum 240 characters</span>
@@ -166,7 +179,7 @@ const Profile = () => {
                         </div>
                         <div className="block content">
                           <span className="require-txt">Email Message: Maximum 31 characters</span>
-                          <input type="text" className="common-input"  maxLength="31" name="emailMsg" autoComplete="off" placeholder={contactVal.emailMsg} />
+                          <input type="text" className="common-input" maxLength="31" name="emailMsg" autoComplete="off" placeholder={contactVal.emailMsg} />
                         </div>
                       </form>
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
@@ -258,7 +271,7 @@ const Profile = () => {
             </p>
             <p className='title'>Petros Topouzis, Founder : eventera.io</p>
           </div>
-          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'} style={{marginTop: '3rem'}}>
+          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'} style={{ marginTop: '3rem' }}>
             <p className="content font-weight-bold">I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.
               <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
             </p>
@@ -367,19 +380,24 @@ const Profile = () => {
           </div>
           <div className="content">
             <p className="font-weight-bold title">To: Omar Faruq</p>
-            <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{width: '136px'}} />.</div>
-            <div className="txt">I work at <input type="text" className="profile-detail" placeholder="Company" style={{width: '135px'}} />;
-            we have around <input type="text" className="profile-detail" placeholder="xx employees" style={{width: '176px'}} />.</div>
-            <div className="txt">My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{width: '203px'}} />,
-            and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{width: '337px'}} />.</div>
+            {contactEditModal['type']['name'] && <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{ width: '136px' }} />.</div>}
+            <div className="txt">
+              {contactEditModal['type']['companyName'] && <>I work at <input type="text" className="profile-detail" placeholder="Company" style={{ width: '135px' }} />;</>}
+              {contactEditModal['type']['employeeNum'] && <>we have around <input type="text" className="profile-detail" placeholder="xx employees" style={{ width: '176px' }} />.</>}
+            </div>
+            <div className="txt">
+              {contactEditModal['type']['phoneNum'] && <>My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{ width: '203px' }} />,</>}
+              {contactEditModal['type']['email'] && <>and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{ width: '337px' }} />.</>}
+            </div>
             <div className="txt">I will like to discuss this  <span className="discuss-content">
-            “I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></div>
+              “I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></div>
           </div>
           <div className="send-btn-part d-flex justify-content-around align-items-center w-100">
             <button className="btn-send font-weight-bold">Send</button>
           </div>
         </Modal.Body>
       </Modal>
+      <EditModal editModal={contactEditModal} setEditModal={setContactEditModal} />
     </div>
   )
 }
@@ -389,9 +407,9 @@ function TalkAboutParagraph(txt, id, mode) {
   return (
     <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
       <div>
-        <img src={id===0 ? List1: (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
+        <img src={id === 0 ? List1 : (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
       </div>
-      <div className={mode ? 'description cursor-pointer' : 'description'} style={{marginLeft: '11.5px'}}>
+      <div className={mode ? 'description cursor-pointer' : 'description'} style={{ marginLeft: '11.5px' }}>
         <span>{txt}</span>
         <span className="m-left-8">
           <img src={Vector} className="email-icon" alt="Vector" />

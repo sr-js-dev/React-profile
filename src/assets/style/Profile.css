@@ -394,7 +394,7 @@
     cursor: pointer;
     transition: all 0.3s linear;
 }
-.open-close-menu .expanded-menu .arrow {
+.arrow {
     transition: all 0.3s ease-in-out;
 }
 .open-close-menu .expanded-menu>div:first-child {
@@ -408,7 +408,6 @@
     height: 26px;
     padding: 5px;
 }
-
 .open-close-menu .select-list {
     position: absolute;
     background-color: #15202B;
@@ -465,6 +464,14 @@
     font-family: Open Sans;
     line-height: 1.7;
 }
+.register .modal-body .content .txt .detail {
+    margin-top: 30px;
+    font-weight: 600;
+    font-family: Open Sans;
+    line-height: 1.7;
+    color: #444D55;
+    text-decoration: underline;
+}
 .register .modal-body .profile-detail {
     color: #FFFFFF;
     background: transparent;
@@ -509,6 +516,110 @@
 }
 .profile-detail::placeholder {
     text-decoration: underline;
+}
+/* EditModal.js */
+.check-list {
+    position: absolute;
+    width: 100%;
+    color: white;
+    left: 0;
+    padding-left: 0px;
+    list-style: none;
+    background: #1D252C;
+    border: 1px solid #8999A6;
+    border-radius: 2px;
+}
+.edit-select-section {
+    width: 260px;
+}
+.edit-select-section .select-box {
+    padding: 9px 13px;
+    border: 1px solid #8999A6;
+}
+.edit-select-section .select-title, .check-list li {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+}
+.check-list li:not(:first-child) {
+    padding: 9px 13px;
+    border-top: 1px solid #8999A6;
+}
+.check-list li:first-child {
+    padding: 9px 13px;
+}
+.check-list input {
+    width: 17px;
+    height: 17px;
+    margin-right: 13px;
+}
+/* checkbox customize */
+.main { 
+    display: block; 
+    position: relative; 
+    padding-left: 30px; 
+    cursor: pointer;
+    font-size: 15px;
+    margin-bottom: 0px !important;
+}
+/* Hide the default checkbox */ 
+input[type=checkbox] { 
+    visibility: hidden; 
+} 
+/* Creating a custom checkbox 
+based on demand */ 
+.geekmark { 
+    position: absolute; 
+    top: 2px; 
+    left: 0; 
+    height: 17px; 
+    width: 17px; 
+    background-color: #FFFFFF; 
+} 
+/* Specify the background color to be 
+shown when checkbox is checked */ 
+.main input:checked ~ .geekmark { 
+    background: #55ACEE;
+    border-radius: 2px;
+} 
+/* Checkmark to be shown in checkbox */ 
+/* It is not be shown when not checked */ 
+.geekmark:after { 
+    content: ""; 
+    position: absolute; 
+    display: none; 
+} 
+/* Display checkmark when checked */ 
+.main input:checked ~ .geekmark:after { 
+    display: block; 
+} 
+/* Styling the checkmark using webkit */ 
+/* Rotated the rectangle by 45 degree and  
+showing only two border to make it look 
+like a tickmark */ 
+.main .geekmark:after { 
+    left: 6px;
+    bottom: 4px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.btn-edit-send {
+    color: #15202B;
+    border: none;
+    outline: none;
+    width: 317px;
+    height: 64px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 70px;
+    transition: all 0.3s linear;
 }
 @media (max-width:1740px) {
     .photo-detail p {

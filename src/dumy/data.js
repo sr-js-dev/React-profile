@@ -23,3 +23,36 @@ export const ThemeMode = [
     "color": "White"
   },
 ];
+
+export const EmailTypes = [
+  {
+    "id" : "1",
+    "item" : "Name",
+    "value": "name"
+  },
+  {
+    "id" : "2",
+    "item" : "Company's name",
+    "value" : "companyName"
+  },
+  {
+    "id" : "3",
+    "item": "Numbers of employee",
+    "value" : "employeeNum"
+  },
+  {
+    "id" : "4",
+    "item" : "Position in the Company",
+    "value": "position"
+  },
+  {
+    "id" : "5",
+    "item" : "Phone Number",
+    "value" : "phoneNum"
+  },
+  {
+    "id" : "6",
+    "item" : "Email",
+    "value" : "email"
+  }
+]
