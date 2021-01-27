@@ -9,12 +9,11 @@ import List3 from "../assets/img/list-3.svg"
 import Menu1 from '../assets/img/menu1.svg'
 import CloseMenu from '../assets/img/CloseMenu.svg'
 import Attached from '../assets/img/attach.svg'
-import CloseIcon from '../assets/img/closeIcon.svg'
 import ThemeIcon from '../assets/img/Theme.svg'
 import PhotoAdd from '../assets/img/photoAdd.svg'
 import Arrow from '../assets/img/arrow.svg'
-import Modal from "react-bootstrap/Modal";
 import EditModal from '../components/EditModal'
+import ViewModal from '../components/ViewModal'
 import EmailListEdit from '../components/EmailListEdit'
 // style
 import "../assets/style/Profile.css";
@@ -23,7 +22,6 @@ import { ThemeMode, TalkAboutData } from '../dumy/data'
 
 const Profile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false)
   const [isCloseMenu, setIsCloseMenu] = useState(false)
   const [isTalkEdit, setIsTalkEdit] = useState(false)
@@ -31,10 +29,12 @@ const Profile = () => {
   const [selectVal, setSelectVal] = useState('Dark')
   const [colorVal, setColorVal] = useState('#55ACEE')
   const [isContactEdit, setIsContactEdit] = useState(false)
-  const [talkAboutEdit, setTalkAboutEdit] = useState({ title: '', emailList: [] })
+  const [talkAboutEdit, setTalkAboutEdit] = useState({})
+  const [talkModalData, setTalkModalData] = useState({})
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
   const [contactEditModal, setContactEditModal] = useState({
-    open: false,
+    viewOpen: false,
+    editOpen: false,
     type: {
       name: true,
       companyName: true,
@@ -49,6 +49,15 @@ const Profile = () => {
     setTalkAboutEdit(TalkAboutData)
   }, [])
 
+  useEffect(() => {
+    if (Object.keys(talkModalData).length > 0) {
+      const _talkAboutEdit = { ...talkAboutEdit }
+      const _talkModalData = { ...talkModalData }
+      let index = parseInt(talkModalData['id']) - 1
+      _talkAboutEdit['emailList'][index] = _talkModalData
+      setTalkAboutEdit(_talkAboutEdit)
+    }
+  }, [talkModalData])
   // select option hide event
   useEffect(() => {
     document.addEventListener("click", closeSelect);
@@ -56,8 +65,8 @@ const Profile = () => {
   }, [isOpenSelect])
 
   useEffect(() => {
-    if (isOpenModal) document.body.style.paddingRight = "0px";
-  }, [isOpenModal])
+    if (contactEditModal.viewOpen) document.body.style.paddingRight = "0px";
+  }, [contactEditModal.viewOpen])
 
   const closeSelect = (evt) => {
     if (evt.target.id === "isOpenSelect") return;
@@ -65,13 +74,9 @@ const Profile = () => {
   }
   // modal show
   const showModal = () => {
-    if (!isEditMode) setIsOpenModal(true);
-    else setContactEditModal({ ...contactEditModal, open: true })
+    if (!isEditMode) setContactEditModal({ ...contactEditModal, viewOpen: true })
+    else setContactEditModal({ ...contactEditModal, editOpen: true })
   };
-  // modal hide
-  const hideModal = () => {
-    setIsOpenModal(false);
-  }
   // What we can talk about section Edit display
   const talkAboutDisplay = () => {
     if (!isEditMode) return;
@@ -107,6 +112,34 @@ const Profile = () => {
     const _msg = data.get('msg') || contactVal.msg
     const _emailMsg = data.get('emailMsg') || contactVal.emailMsg
     setContactVal({ title: _title, msg: _msg, emailMsg: _emailMsg })
+  }
+  // eamilList modal show
+  const emailListModalShow = (id) => {
+    const _emailList = { ...talkAboutEdit['emailList'][id] }
+    if (!isEditMode) {
+      _emailList['viewOpen'] = true
+      _emailList['editOpen'] = false
+    } else {
+      _emailList['editOpen'] = true
+      _emailList['viewOpen'] = false
+    }
+    setTalkModalData(_emailList)
+  }
+  // talk about content
+  const TalkAboutParagraph = (txt, id, mode) => {
+    return (
+      <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
+        <div>
+          <img src={id === 0 ? List1 : (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
+        </div>
+        <div className='description cursor-pointer' style={{ marginLeft: '11.5px' }} onClick={() => emailListModalShow(id)}>
+          <span>{txt}</span>
+          <span className="m-left-8">
+            <img src={Vector} className="email-icon" alt="Vector" />
+          </span>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -162,7 +195,7 @@ const Profile = () => {
                     <img src={ProfileImg} alt="profile" className="profile-img" />
                   </div>
                 </div>
-                <div className="col-lg-7 mb-2 position-relative">
+                <div className={isEditMode ? 'col-lg-7 mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
                   {
                     isEditMode && isContactEdit &&
                     <>
@@ -184,9 +217,11 @@ const Profile = () => {
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
                     </>
                   }
-                  <h2 className={isEditMode ? 'dashed-border title mb-4 cursor-pointer' : 'title mb-4'} onClick={contactDisplay}>{contactVal.title}</h2>
-                  <p className={isEditMode ? 'dashed-border description' : 'description'}>{contactVal.msg}</p>
-                  <p className={isEditMode ? 'dashed-border similar-subject' : 'similar-subject'} onClick={showModal}>
+                  <div className={isEditMode ? 'dashed-border cursor-pointer mb-3' : 'mb-3'} onClick={contactDisplay}>
+                    <h2 className='title mb-4'>{contactVal.title}</h2>
+                    <p className='description mb-0'>{contactVal.msg}</p>
+                  </div>
+                  <p className={isEditMode ? 'dashed-border similar-subject mb-0' : 'similar-subject'} onClick={showModal}>
                     <span>{contactVal.emailMsg}</span>
                     <span className="m-left-8">
                       <img src={Vector} className="email-icon" alt="Vector" />
@@ -201,8 +236,8 @@ const Profile = () => {
                 <div className="col-lg-12 position-relative">
                   <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>{talkAboutEdit['title']}</h2>
                   {
-                    talkAboutEdit['content'] && talkAboutEdit['content'].length > 0 && talkAboutEdit['content'].map((item, i) => (
-                      TalkAboutParagraph(item, i, isEditMode)
+                    talkAboutEdit['emailList'] && talkAboutEdit['emailList'].length > 0 && talkAboutEdit['emailList'].map((item, i) => (
+                      TalkAboutParagraph(item['content'], i, isEditMode)
                     ))
                   }
                   {
@@ -358,49 +393,14 @@ const Profile = () => {
               <button className="btn-close-edit-mode" onClick={() => setIsEditMode(!isEditMode)}><strong>Close Edit Mode</strong></button>
             </div>
           </div>}
-      {/* modal */}
-      <Modal show={isOpenModal} onHide={hideModal} className="register" animation={false}>
-        <Modal.Body>
-          <div className="close-icon">
-            <img src={CloseIcon} onClick={hideModal} alt="closeIcon" />
-          </div>
-          <div className="content">
-            <p className="font-weight-bold title">To: Omar Faruq</p>
-            {contactEditModal['type']['name'] && <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" style={{ width: '136px' }} />.</div>}
-            <div className="txt">
-              {contactEditModal['type']['companyName'] && <>I work at <input type="text" className="profile-detail" placeholder="Company" style={{ width: '135px' }} />;</>}
-              {contactEditModal['type']['employeeNum'] && <>we have around <input type="text" className="profile-detail" placeholder="xx employees" style={{ width: '176px' }} />.</>}
-            </div>
-            <div className="txt">
-              {contactEditModal['type']['phoneNum'] && <>My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" style={{ width: '203px' }} />,</>}
-              {contactEditModal['type']['email'] && <>and my work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" style={{ width: '337px' }} />.</>}
-            </div>
-            <div className="txt">I will like to discuss this  <span className="discuss-content">
-              “I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead”</span></div>
-          </div>
-          <div className="send-btn-part d-flex justify-content-around align-items-center w-100">
-            <button className="btn-send font-weight-bold">Send</button>
-          </div>
-        </Modal.Body>
-      </Modal>
-      <EditModal editModal={contactEditModal} setEditModal={setContactEditModal} />
-    </div>
-  )
-}
+      {/* Contact modal */}
+      <ViewModal viewModal={contactEditModal} setViewModal={setContactEditModal} isFlag="contact" />
+      <EditModal editModal={contactEditModal} setEditModal={setContactEditModal} isFlag="talk" />
 
-// talk about content
-function TalkAboutParagraph(txt, id, mode) {
-  return (
-    <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
-      <div>
-        <img src={id === 0 ? List1 : (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
-      </div>
-      <div className={mode ? 'description cursor-pointer' : 'description'} style={{ marginLeft: '11.5px' }}>
-        <span>{txt}</span>
-        <span className="m-left-8">
-          <img src={Vector} className="email-icon" alt="Vector" />
-        </span>
-      </div>
+      {/* Talk modal */}
+      { Object.keys(talkModalData).length > 0 && talkModalData['viewOpen'] && <ViewModal viewModal={talkModalData} setViewModal={setTalkModalData} isFlag="contact" />}
+      { Object.keys(talkModalData).length > 0 && talkModalData['editOpen'] && <EditModal editModal={talkModalData} setEditModal={setTalkModalData} isFlag="talk" />}
+
     </div>
   )
 }
