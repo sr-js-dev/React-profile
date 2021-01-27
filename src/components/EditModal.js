@@ -10,6 +10,7 @@ const EditModal = (props) => {
     name: true,
     companyName: true,
     position: true,
+    employeeNum: true,
     phoneNum: true,
     email: true
   })
@@ -68,6 +69,7 @@ const EditModal = (props) => {
           <div className="content">
             {type['name'] && <div className="txt">My name is <span className="detail">Jane Smith.</span></div>}
             {type['companyName'] && <div className="txt">I work at <span className="detail">Company.</span></div>}
+            {type['employeeNum'] && <div className="txt">we have arround <span className="detail">XX employees.</span></div>}
             {type['position'] && <div className="txt">My current position is <span className="detail">CFO.</span></div>}
             {type['phoneNum'] && <div className="txt">My phone number is <span className="detail">+XX-X-XXX-XXXX.</span></div>}
             {type['email'] && <div className="txt">My work email is <span className="detail">jane.smith@company.com</span></div>}

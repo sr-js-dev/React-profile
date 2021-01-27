@@ -27,6 +27,7 @@ const ViewModal = (props) => {
           <p className="font-weight-bold title">To: Omar Faruq</p>
           {emailType['name'] && <div className="txt">My name is <input type="text" className="profile-detail" placeholder="Jane Smith" /></div>}
           {emailType['companyName'] && <div className="txt">I work at <input type="text" className="profile-detail" placeholder="Company" /></div>}
+          {emailType['employeeNum'] && <div className="txt">we have arround <input type="text" className="profile-detail" placeholder="XX employees" /></div>}
           {emailType['position'] && <div className="txt">My current position is <input type="text" className="profile-detail" placeholder="CFO" /></div>}
           {emailType['phoneNum'] && <div className="txt">My phone number is <input type="text" className="profile-detail" placeholder="+XX-X-XXX-XXXX" /></div>}
           {emailType['email'] && <div className="txt">My work email is <input type="text" className="profile-detail" placeholder="jane.smith@company.com" /></div>}

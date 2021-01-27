@@ -22,16 +22,21 @@ export const EmailTypes = [
   },
   {
     "id": "3",
+    "item": "Numbers of employee",
+    "value": "employeeNum"
+  },
+  {
+    "id": "4",
     "item": "Position in the Company",
     "value": "position"
   },
   {
-    "id": "4",
+    "id": "5",
     "item": "Phone Number",
     "value": "phoneNum"
   },
   {
-    "id": "5",
+    "id": "6",
     "item": "Email",
     "value": "email"
   }
@@ -40,6 +45,7 @@ export const EmailTypes = [
 export const EmailItemCheck = {
   name: true,
   companyName: true,
+  employeeNum: true,
   position: true,
   phoneNum: true,
   email: true

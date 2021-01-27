@@ -130,7 +130,7 @@ const Profile = () => {
     return (
       <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
         <div style={{ backgroundImage: `url(${List})` }} className="list-img">
-          {id<9 ? `0${id+1}` : id+1}
+          {id < 9 ? `0${id + 1}` : id + 1}
         </div>
         <div className='description cursor-pointer' style={{ marginLeft: '11.5px' }} onClick={() => emailListModalShow(id)}>
           <span>{txt}</span>
@@ -302,7 +302,7 @@ const Profile = () => {
                 </div>
                 <div className="col-lg-4">
                   <h1>Address</h1>
-                  <p className="mb-0" style={{width: '200px'}}>{profileEdit['info'] && profileEdit['info']['address']}</p>
+                  <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
                 </div>
                 <div className="col-lg-4">
                   <h1>Office number</h1>
