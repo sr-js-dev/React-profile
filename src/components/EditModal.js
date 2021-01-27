@@ -9,7 +9,6 @@ const EditModal = (props) => {
   const [type, setType] = useState({
     name: true,
     companyName: true,
-    employeeNum: true,
     position: true,
     phoneNum: true,
     email: true

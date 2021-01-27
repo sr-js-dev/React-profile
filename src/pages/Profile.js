@@ -16,7 +16,7 @@ import EmailListEdit from '../components/EmailListEdit'
 // style
 import "../assets/style/Profile.css";
 // dumy data
-import { ThemeMode, TalkAboutData } from '../dumy/data'
+import { ThemeMode, TalkAboutData, ProfileData } from '../dumy/data'
 
 const Profile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -29,6 +29,7 @@ const Profile = () => {
   const [isContactEdit, setIsContactEdit] = useState(false)
   const [talkAboutEdit, setTalkAboutEdit] = useState({})
   const [talkModalData, setTalkModalData] = useState({})
+  const [profileEdit, setProfileEdit] = useState({})
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
   const [contactEditModal, setContactEditModal] = useState({
     viewOpen: false,
@@ -45,6 +46,7 @@ const Profile = () => {
   // Talk About string get from dumy data
   useEffect(() => {
     setTalkAboutEdit(TalkAboutData)
+    setProfileEdit(ProfileData)
   }, [])
 
   useEffect(() => {
@@ -127,8 +129,8 @@ const Profile = () => {
   const TalkAboutParagraph = (txt, id, mode) => {
     return (
       <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
-        <div>
-          <img src={List} alt="List1" className="list-img" />
+        <div style={{ backgroundImage: `url(${List})` }} className="list-img">
+          {id<9 ? `0${id+1}` : id+1}
         </div>
         <div className='description cursor-pointer' style={{ marginLeft: '11.5px' }} onClick={() => emailListModalShow(id)}>
           <span>{txt}</span>
@@ -201,7 +203,7 @@ const Profile = () => {
                     <img src={ProfileImg} alt="profile" className="profile-img" />
                   </div>
                 </div>
-                <div className={isEditMode ? 'col-lg-7 mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
+                <div className={isEditMode ? 'col-lg-7 dashed-border mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
                   {
                     isEditMode && isContactEdit &&
                     <>
@@ -223,11 +225,11 @@ const Profile = () => {
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
                     </>
                   }
-                  <div className={isEditMode ? 'dashed-border cursor-pointer mb-3' : 'mb-3'} onClick={contactDisplay}>
+                  <div className='cursor-pointer mb-3' onClick={contactDisplay}>
                     <h2 className='title mb-4'>{contactVal.title}</h2>
                     <p className='description mb-0'>{contactVal.msg}</p>
                   </div>
-                  <p className={isEditMode ? 'dashed-border similar-subject mb-0' : 'similar-subject'} onClick={showModal}>
+                  <p className='similar-subject mb-0' onClick={showModal}>
                     <span>{contactVal.emailMsg}</span>
                     <span className="m-left-8">
                       <img src={Vector} className="email-icon" alt="Vector" />
@@ -257,29 +259,54 @@ const Profile = () => {
               </div>
             </div>
             {/* section3 */}
-            <div className="profile-info-section desktop-view">
+            <div className="profile-info-section desktop-view position-relative">
+              <div className="profile-edit">
+                <div className="position-relative">
+                  <button className="btn-save-edit-mode">Save</button>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <h1>Company</h1>
+                      <input type="text" />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Department</h1>
+                      <input type="text" />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Location</h1>
+                      <input type="text" />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Address</h1>
+                      <textarea />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Office number</h1>
+                      <input type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
                 <div className="col-lg-4">
                   <h1>Company</h1>
-                  <p className="mb-0">OnTheGo Accountants</p>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
                 </div>
                 <div className="col-lg-4">
                   <h1>Department</h1>
-                  <p className="mb-0">Tech & Growth</p>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
                 </div>
                 <div className="col-lg-4">
                   <h1>Location</h1>
-                  <p className="mb-0">Birmingham</p>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
                 </div>
                 <div className="col-lg-4">
                   <h1>Address</h1>
-                  <p className="mb-0">The Colmore Building</p>
-                  <p className="mb-0">20 Colmore Circus Queensway</p>
-                  <p className="mb-0">Birmingham, B4 6AT</p>
+                  <p className="mb-0" style={{width: '200px'}}>{profileEdit['info'] && profileEdit['info']['address']}</p>
                 </div>
                 <div className="col-lg-4">
                   <h1>Office number</h1>
-                  <a href="#phone">03330 067 123</a>
+                  <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
                 </div>
               </div>
             </div>

@@ -40,7 +40,6 @@ export const EmailTypes = [
 export const EmailItemCheck = {
   name: true,
   companyName: true,
-  employeeNum: true,
   position: true,
   phoneNum: true,
   email: true
@@ -71,4 +70,15 @@ export const TalkAboutData = {
       editOpen: false,
     }
   ]
+}
+
+export const ProfileData = {
+  isOpen: false,
+  info: {
+    company: "OnTheGo Accountants",
+    department: "Tech & Growth",
+    location: "Birmingham",
+    address: "The Colmore Building 20 Colmore Circus Queensway Birmingham, B4 6AT",
+    officeNum: "03330 067 123"
+  }
 }
