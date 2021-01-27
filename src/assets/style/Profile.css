@@ -164,6 +164,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
+    color: #7b7b7b;
 }
 .contact-edit .content {
     margin-top: 25px;
@@ -173,6 +174,9 @@
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
+    color: #7b7b7b;
+    transition: all 0.2s;
+    overflow:hidden;
 }
 .talk-about-section>div>div {
     margin-top: 30px;
@@ -233,7 +237,7 @@
     border: none;
     background: transparent;
     outline: none;
-    color: #FFFFFF;
+    color: #7b7b7b;
 }
 .talk-about-edit .title span {
     font-family: Oswald;
@@ -279,12 +283,14 @@
     resize: none;
     outline: none;
     background: transparent;
-    color: #FFFFFF;
+    color: #7b7b7b;
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     border: none;
+    transition: all 0.3s ease-in-out;
+    overflow:hidden;
 }
 .btn-save-edit-mode {
     position: absolute;

@@ -3,9 +3,7 @@ import BackgroundImg from "../assets/img/bg-img2.png";
 import ProfileImg from "../assets/img/profileImg.png";
 import Logo from "../assets/img/Logo.svg";
 import Vector from "../assets/img/Vector.svg";
-import List1 from "../assets/img/list-1.svg";
-import List2 from "../assets/img/list-2.svg"
-import List3 from "../assets/img/list-3.svg"
+import List from "../assets/img/Number-background.svg";
 import Menu1 from '../assets/img/menu1.svg'
 import CloseMenu from '../assets/img/CloseMenu.svg'
 import Attached from '../assets/img/attach.svg'
@@ -130,7 +128,7 @@ const Profile = () => {
     return (
       <div className={mode ? 'd-flex align-items-center talk-txt dashed-border' : 'd-flex align-items-center talk-txt'} key={id}>
         <div>
-          <img src={id === 0 ? List1 : (id === 1 ? List2 : List3)} alt="List1" className="list-img" />
+          <img src={List} alt="List1" className="list-img" />
         </div>
         <div className='description cursor-pointer' style={{ marginLeft: '11.5px' }} onClick={() => emailListModalShow(id)}>
           <span>{txt}</span>
@@ -140,6 +138,14 @@ const Profile = () => {
         </div>
       </div>
     )
+  }
+
+  const handleKeyDown = (e) => {
+    var el = e.target;
+    setTimeout(function () {
+      el.style.cssText = 'height:auto; padding:0';
+      el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    }, 0);
   }
 
   return (
@@ -203,15 +209,15 @@ const Profile = () => {
                         <button className="btn-save-edit-mode">Save</button>
                         <div className="title block">
                           <span className="require-txt">Title: Maximum 21 characters</span>
-                          <input type="text" className="common-input" name="title" autoComplete="off" placeholder={contactVal.title} autoFocus={true} maxLength="21" />
+                          <input type="text" className="common-input" name="title" autoComplete="off" defaultValue={contactVal.title} autoFocus={true} maxLength="21" />
                         </div>
                         <div className="block content">
                           <span className="require-txt">Message: Maximum 240 characters</span>
-                          <textarea row="2" maxLength="240" placeholder={contactVal.msg} name="msg" autoComplete="off" className="common-textarea" />
+                          <textarea maxLength="240" defaultValue={contactVal.msg} name="msg" autoComplete="off" className="common-textarea" onKeyDown={handleKeyDown} />
                         </div>
                         <div className="block content">
                           <span className="require-txt">Email Message: Maximum 31 characters</span>
-                          <input type="text" className="common-input" maxLength="31" name="emailMsg" autoComplete="off" placeholder={contactVal.emailMsg} />
+                          <input type="text" className="common-input" maxLength="31" name="emailMsg" autoComplete="off" defaultValue={contactVal.emailMsg} />
                         </div>
                       </form>
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>

@@ -28,7 +28,7 @@ const EmailListEdit = (props) => {
       for (let i = len; i < val; i++) {
         const tempObj = {
           id: `${i + 1}`,
-          content: `${i + 1}. Talk about your company’s goals and find out how our firm services can help boost your business`,
+          content: `Talk about your company’s goals and find out how our firm services can help boost your business`,
           type: EmailItemCheck,
           viewOpen: false,
           editOpen: false,
@@ -55,13 +55,21 @@ const EmailListEdit = (props) => {
     setTempEmailList(_tempEmailList)
   }
 
+  const handleKeyDown = (e) => {
+    var el = e.target;
+    setTimeout(function () {
+      el.style.cssText = 'height:auto; padding:0';
+      el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    }, 0);
+  }
+
   return (
     <div className="talk-about-edit">
       <div className="position-relative">
         <button onClick={hideSaveForm} className="btn-save-edit-mode">Save</button>
         <div className="title">
           <span>Title: Maximum  21 characters</span>
-          <input type="text" name="title" autoFocus={true} maxLength="21" placeholder={title} onChange={(evt) => setTitle(evt.target.value)} />
+          <input type="text" name="title" autoFocus={true} maxLength="21" value={title} onChange={(evt) => setTitle(evt.target.value)} />
         </div>
         <div className="content">
           <div className="email-num-set">
@@ -76,7 +84,7 @@ const EmailListEdit = (props) => {
           <div className="email-display">
             {
               tempEmailList && tempEmailList.length > 0 && tempEmailList.map((item, i) => (
-                <textarea key={i} placeholder={item['content']} maxLength="240" onChange={(evt) => handleChange(evt, i)} />
+                <textarea key={i} value={item['content']} maxLength="240" onChange={(evt) => handleChange(evt, i)} onKeyDown={handleKeyDown} />
               ))
             }
           </div>
