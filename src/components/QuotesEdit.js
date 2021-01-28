@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import CustomTextEditor from './TextEditor'
+import CustomTextEditor from './CustomTextEditor'
 
 const Quotes = (props) => {
   const { content, qoutesEdit, setQoutesEdit, id, setId, index } = props

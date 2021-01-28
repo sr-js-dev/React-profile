@@ -527,44 +527,11 @@
     width: 100%;
 }
 /* text editor */
-.custom-text-editor .head-bar-section {
-    display: flex;
-    justify-content: center;
+.custom-text-editor .ck-content {
+    background: transparent !important;
 }
-.custom-text-editor .head-bar {
-    width: 259px;
-    height: 43px;
-    background: #000000;
-    border: 1px solid #747C82;
-    border-radius: 6px;
-    color: #FFFFFF;
-}
-.custom-text-editor .head-bar .first {
-    border-right: 1px solid #747C82;;
-}
-.editable {
-    font-family: Open Sans;
-    border: none;
-    outline: none;
-    width: 100%;
-    min-height: 100px;
-    color: #797c80;
-    overflow: hidden;
-    padding: 3px;
-    resize: none;
-}
-button.edit-btn {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-}
-.edit-btn:focus {
-    outline: none;
-}
-textarea.editable {
-    font-family: monospace, monospace;
-}
+
+
 
 .profile-photo-title-bar {
     position: fixed;
