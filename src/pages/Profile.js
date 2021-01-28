@@ -13,10 +13,11 @@ import Arrow from '../assets/img/arrow.svg'
 import EditModal from '../components/EditModal'
 import ViewModal from '../components/ViewModal'
 import EmailListEdit from '../components/EmailListEdit'
+import QoutesEdit from '../components/QuotesEdit'
 // style
 import "../assets/style/Profile.css";
 // dumy data
-import { ThemeMode, TalkAboutData, ProfileData } from '../dumy/data'
+import { ThemeMode, TalkAboutData, ProfileData, QoutesData, QoutesDemoData } from '../dumy/data'
 
 const Profile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -30,6 +31,9 @@ const Profile = () => {
   const [talkAboutEdit, setTalkAboutEdit] = useState({})
   const [talkModalData, setTalkModalData] = useState({})
   const [profileEdit, setProfileEdit] = useState({})
+  const [qoutesEdit, setQoutesEdit] = useState({})
+  const [tempqoutesEdit, setTempQoutesEdit] = useState({})
+  const [selectedId, setSelectedId] = useState(0)
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
   const [contactEditModal, setContactEditModal] = useState({
     viewOpen: false,
@@ -47,6 +51,7 @@ const Profile = () => {
   useEffect(() => {
     setTalkAboutEdit(TalkAboutData)
     setProfileEdit(ProfileData)
+    setQoutesEdit(QoutesData)
   }, [])
 
   useEffect(() => {
@@ -103,6 +108,51 @@ const Profile = () => {
     if (!isEditMode) return;
     setIsContactEdit(true)
   }
+  // show profile edit
+  const showProfileEdit = () => {
+    if (!isEditMode) return
+    setProfileEdit({ ...profileEdit, isOpen: true })
+  }
+  // show quotes modal
+  const showQuotes = () => {
+    if (!isEditMode) return
+    setTempQoutesEdit({ ...qoutesEdit })
+    setQoutesEdit({ ...qoutesEdit, isOpen: true })
+  }
+  // hide quotes edit modal
+  const hideQuotesEdit = () => {
+    setQoutesEdit({ ...tempqoutesEdit })
+  }
+  // show quotes item edit
+  const showItemEdit = (index) => {
+    if (!isEditMode) return
+    setSelectedId(index)
+  }
+  // qoutes list change
+  const qoutesListChange = (evt) => {
+    const _qoutesEdit = { ...qoutesEdit }
+    if (evt.target.value === "") { setQoutesEdit({ ...qoutesEdit, list: [] }); return };
+    let val = parseInt(evt.target.value)
+    let len = parseInt(_qoutesEdit['list'].length)
+    if (len > val) {
+      let _tempQuotes = _qoutesEdit['list'];
+      let arr = _tempQuotes.slice(0, val)
+      setQoutesEdit({ ...qoutesEdit, list: arr })
+    } else {
+      let _tempQuotes = _qoutesEdit['list'];
+      for (let i = len; i < val; i++) {
+        const tempObj = {
+          id: `${i + 1}`,
+          content: QoutesDemoData.content,
+          empaseContent: QoutesDemoData.empaseContent,
+          name: QoutesDemoData.name,
+          founder: QoutesDemoData.founder
+        }
+        _tempQuotes[i] = tempObj
+      }
+      setQoutesEdit({ ...qoutesEdit, list: _tempQuotes })
+    }
+  }
   // contact value change
   const contactChange = (evt) => {
     setIsContactEdit(false)
@@ -112,6 +162,25 @@ const Profile = () => {
     const _msg = data.get('msg') || contactVal.msg
     const _emailMsg = data.get('emailMsg') || contactVal.emailMsg
     setContactVal({ title: _title, msg: _msg, emailMsg: _emailMsg })
+  }
+  // profile edit value change
+  const profileSave = (evt) => {
+    evt.preventDefault();
+    const _profileEdit = { ...profileEdit }
+    const data = new FormData(evt.target);
+    const _company = data.get('company') || _profileEdit['info']['company']
+    const _department = data.get('department') || _profileEdit['info']['department']
+    const _location = data.get('location') || _profileEdit['info']['location']
+    const _address = data.get('address') || _profileEdit['info']['address']
+    const _officeNum = data.get('officeNum') || _profileEdit['info']['officeNum']
+    const _info = {
+      company: _company,
+      department: _department,
+      location: _location,
+      address: _address,
+      officeNum: _officeNum
+    }
+    setProfileEdit({ isOpen: false, info: _info })
   }
   // eamilList modal show
   const emailListModalShow = (id) => {
@@ -260,34 +329,40 @@ const Profile = () => {
             </div>
             {/* section3 */}
             <div className="profile-info-section desktop-view position-relative">
-              <div className="profile-edit">
-                <div className="position-relative">
-                  <button className="btn-save-edit-mode">Save</button>
-                  <div className="row">
-                    <div className="col-lg-4">
-                      <h1>Company</h1>
-                      <input type="text" />
-                    </div>
-                    <div className="col-lg-4">
-                      <h1>Department</h1>
-                      <input type="text" />
-                    </div>
-                    <div className="col-lg-4">
-                      <h1>Location</h1>
-                      <input type="text" />
-                    </div>
-                    <div className="col-lg-4">
-                      <h1>Address</h1>
-                      <textarea />
-                    </div>
-                    <div className="col-lg-4">
-                      <h1>Office number</h1>
-                      <input type="text" />
-                    </div>
+              {
+                isEditMode && profileEdit['isOpen'] &&
+                <>
+                  <div className="profile-edit">
+                    <form className="position-relative" onSubmit={profileSave}>
+                      <button className="btn-save-edit-mode">Save</button>
+                      <div className="row">
+                        <div className="col-lg-4">
+                          <h1>Company</h1>
+                          <input type="text" name="company" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['company']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Department</h1>
+                          <input type="text" name="department" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['department']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Location</h1>
+                          <input type="text" name="location" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['location']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Address</h1>
+                          <textarea name="address" rows="4" defaultValue={profileEdit['info'] && profileEdit['info']['address']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Office number</h1>
+                          <input type="text" name="officeNum" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['officeNum']} />
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                </div>
-              </div>
-              <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
+                  <div className="layout" onClick={() => setProfileEdit({ ...profileEdit, isOpen: false })}></div>
+                </>
+              }
+              <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'} onClick={showProfileEdit}>
                 <div className="col-lg-4">
                   <h1>Company</h1>
                   <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
@@ -314,48 +389,70 @@ const Profile = () => {
         </div>
         {/* section4 */}
         <div className="col-lg-5 qoutes-section px-4">
-          <div>
-            <p className={isEditMode ? 'title mb-4 dashed-border' : 'title mb-4'}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
+          <div className="position-relative">
+            {
+              isEditMode && qoutesEdit['isOpen'] &&
+              <>
+                <div className="qoutes-edit">
+                  <div className="position-relative">
+                    <button className="btn-save-edit-mode" onClick={() => setQoutesEdit({ ...qoutesEdit, isOpen: false })}>Save</button>
+                    <div className="email-num-set">
+                      <span className="require">Email Messages: Maximum 240 characters</span>
+                      <div className="position-relative email-num-increase">
+                        <div className="select-box">
+                          <span>How many email messages</span>
+                          <input type="text" className="email-num-input" value={qoutesEdit['list'].length} onChange={qoutesListChange} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="title">
+                      <input type="text" className="common-input" defaultValue="Qoutes from clients About me" />
+                    </div>
+                  </div>
+                </div>
+                <div className="layout" onClick={hideQuotesEdit}></div>
+              </>
+            }
+            <p className={isEditMode ? 'title mb-4 dashed-border cursor-pointer' : 'title mb-4'} onClick={showQuotes}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
           </div>
-          <div className={isEditMode ? 'dashed-border' : ''}>
-            <p className='content font-weight-bold'>“This is by far the best accounting service that I've ever used. A unique combination of quality,
-            affordability and kindness. Virtually, this is the best experience you can have with any accounting firm.
-            For our company (Eventera Ltd),
-              <span className="emphases">they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!”</span>
-            </p>
-            <p className='title'>Petros Topouzis, Founder : eventera.io</p>
-          </div>
-          <div className={isEditMode ? 'dashed-border mb-4' : 'mb-4'} style={{ marginTop: '3rem' }}>
-            <p className="content font-weight-bold">I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.
-              <span className="emphases">&nbsp;Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>
-            </p>
-            <p className="title">Viswa, Founder</p>
-          </div>
+          {
+            qoutesEdit['list'] && qoutesEdit['list'].length > 0 && qoutesEdit['list'].map((item, i) => (
+              <div className="position-relative" key={i} >
+                <div className={isEditMode ? 'dashed-border cursor-pointer' : ''} style={{ marginBottom: '3rem' }} onClick={() => showItemEdit(item.id)}>
+                  <p className='content font-weight-bold'>{item['content']},
+                    <span className="emphases">{item['empaseContent']}</span>
+                  </p>
+                  <p className='title'>{item['name']}, Founder : {item['founder']}</p>
+                </div>
+                {isEditMode
+                  && selectedId === item.id
+                  && <QoutesEdit content={item} qoutesEdit={qoutesEdit} setQoutesEdit={setQoutesEdit} index={i} id={selectedId} setId={setSelectedId} />}
+              </div>
+            ))
+          }
         </div>
         {/* mobile view for section3 */}
         <div className="profile-info-section mobile-view">
           <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
             <div className="col-lg-4">
               <h1>Company</h1>
-              <p className="mb-0">OnTheGo Accountants</p>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
             </div>
             <div className="col-lg-4">
               <h1>Department</h1>
-              <p className="mb-0">Tech & Growth</p>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
             </div>
             <div className="col-lg-4">
               <h1>Location</h1>
-              <p className="mb-0">Birmingham</p>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
             </div>
             <div className="col-lg-4">
               <h1>Address</h1>
-              <p className="mb-0">The Colmore Building</p>
-              <p className="mb-0">20 Colmore Circus Queensway</p>
-              <p className="mb-0">Birmingham, B4 6AT</p>
+              <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
             </div>
             <div className="col-lg-4">
               <h1>Office number</h1>
-              <a href="#phone">03330 067 123</a>
+              <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
             </div>
           </div>
         </div>
@@ -433,7 +530,6 @@ const Profile = () => {
       {/* Talk modal */}
       { Object.keys(talkModalData).length > 0 && talkModalData['viewOpen'] && <ViewModal viewModal={talkModalData} setViewModal={setTalkModalData} isFlag="contact" />}
       { Object.keys(talkModalData).length > 0 && talkModalData['editOpen'] && <EditModal editModal={talkModalData} setEditModal={setTalkModalData} isFlag="talk" />}
-
     </div>
   )
 }

@@ -88,3 +88,32 @@ export const ProfileData = {
     officeNum: "03330 067 123"
   }
 }
+
+export const QoutesData = {
+  title: "Qoutes from Clients About me",
+  isOpen: false,
+  list: [
+    {
+      id: "1",
+      content: "This is by far the best accounting service that I've ever used. A unique combination of quality, affordability and kindness. Virtually, this is the best experience you can have with any accounting firm. For our company (Eventera Ltd),",
+      empaseContent: "they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!",
+      name: "Petros Topouzis",
+      founder: "eventera.io"
+    },
+    {
+      id: "2",
+      content: "I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.",
+      empaseContent: "Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.",
+      name: "Viswa",
+      founder: ""
+    },
+  ]
+}
+
+export const QoutesDemoData = {
+  id: "1",
+  content: "This is by far the best accounting service that I've ever used. A unique combination of quality, affordability and kindness. Virtually, this is the best experience you can have with any accounting firm. For our company (Eventera Ltd),",
+  empaseContent: "they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!",
+  name: "Petros Topouzis",
+  founder: "eventera.io"
+}

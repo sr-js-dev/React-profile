@@ -112,14 +112,40 @@
 }
 .profile-edit {
     position: absolute;
-    top: 0px;
+    top: -2px;
     left: 0px;
     width: 100%;
     background: #15202B;
     box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
-    padding: 16px 40px;
     border-radius: 5px;
     z-index: 999;
+}
+.profile-edit .row {
+    padding: 43px 23px;
+}
+.profile-edit input, .profile-edit textarea {
+    background: transparent;
+    outline: none;
+    border: 1px solid #39444D;
+    border-radius: 4px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+    width: 241px;
+    opacity: 0.2;
+    padding: 12px 11px;
+    resize: none;
+    overflow: hidden;
+}
+
+.profile-edit h1 {
+    margin-left: 5px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px !important;
 }
 .photo-detail p:last-child {
     font-size: 17px;
@@ -154,6 +180,7 @@
     font-size: 20px;
     cursor: pointer;
 }
+/* contact-edit section */
 .contact-edit {
     position: absolute;
     top: 1px;
@@ -189,6 +216,7 @@
     transition: all 0.2s;
     overflow:hidden;
 }
+/* talk about section */
 .talk-about-section>div>div {
     margin-top: 30px;
     margin-bottom: 32px;
@@ -329,6 +357,7 @@
     border-radius: 4px;
     color: #15202b;
 }
+/* profile information section */
 .profile-info-section {
     color: #FFFFFF;
     padding-bottom: 100px;
@@ -353,6 +382,7 @@
 .profile-info-section a {
     text-decoration: underline;
 }
+/* qoutes section */
 .qoutes-section {
     padding-top: 93px;
 }
@@ -374,6 +404,168 @@
     color: #15202b;
     padding: 3px;
 }
+/* qoutes edit */
+.qoutes-edit {
+    position: absolute;
+    background: #15202B;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
+    right: 1px;
+    top: 1px;
+    width: 140%;
+    z-index: 999;
+}
+.qoutes-edit>div {
+    padding: 41px 17px;
+}
+.qoutes-edit .content .email-num-increase {
+    width: 230px;
+    height: 27px;
+    border: 1px solid #8999A6;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+.qoutes-edit  .email-num-set {
+    display: flex;
+    align-items: center;
+}
+.qoutes-edit  .select-box {
+    padding: 0px 3px;
+}
+.qoutes-edit  .email-num-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #FFFFFF;
+    width: 25px;
+    margin-left: 5px;
+}
+.qoutes-edit .email-num-increase {
+    width: 230px;
+    height: 27px;
+    border: 1px solid #8999A6;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+.qoutes-edit .require{
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+.qoutes-edit .title {
+    margin-top: 7px;
+}
+.qoutes-edit .title input {
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    color: #FFFFFF;
+    opacity: 0.2;
+    width: 344px;
+}
+/* qoutes item edit */
+.quotes-item-edit {
+    position: absolute;
+    background: #15202B;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
+    right: 1px;
+    top: 1px;
+    width: 140%;
+    z-index: 999;
+}
+.quotes-item-edit .main-block {
+    padding: 16px 41px;
+}
+.quotes-item-edit .require-section span {
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+.quotes-item-edit .content {
+    margin-top: 26px;
+}
+.quotes-item-edit .client-name-part {
+    margin-top: 16px;
+}
+.quotes-item-edit .client-name-part h1 {
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
+.quotes-item-edit .content textarea {
+    width: 100%;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.2);
+}
+.quotes-item-edit .content .emphase-content .emphase-txt{
+    width: 100%;
+    font-family: Open Sans;
+    font-size: 18px;
+    /* color: rgba(255, 255, 255, 0.2); */
+    background-color: #CFF2EE;
+    color: #797c80;
+    padding: 3px;
+}
+.quotes-item-edit .client-name-part input {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #FFFFFF;
+    opacity: 0.2;
+    width: 100%;
+}
+/* text editor */
+.custom-text-editor .head-bar-section {
+    display: flex;
+    justify-content: center;
+}
+.custom-text-editor .head-bar {
+    width: 259px;
+    height: 43px;
+    background: #000000;
+    border: 1px solid #747C82;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.custom-text-editor .head-bar .first {
+    border-right: 1px solid #747C82;;
+}
+.editable {
+    font-family: Open Sans;
+    border: none;
+    outline: none;
+    width: 100%;
+    min-height: 100px;
+    color: #797c80;
+    overflow: hidden;
+    padding: 3px;
+    resize: none;
+}
+button.edit-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+.edit-btn:focus {
+    outline: none;
+}
+textarea.editable {
+    font-family: monospace, monospace;
+}
+
 .profile-photo-title-bar {
     position: fixed;
     width: 681.87px;
