@@ -14,6 +14,7 @@ import EditModal from '../components/EditModal'
 import ViewModal from '../components/ViewModal'
 import EmailListEdit from '../components/EmailListEdit'
 import QoutesEdit from '../components/QuotesEdit'
+import { Markup } from 'interweave';
 // style
 import "../assets/style/Profile.css";
 // dumy data
@@ -419,9 +420,9 @@ const Profile = () => {
             qoutesEdit['list'] && qoutesEdit['list'].length > 0 && qoutesEdit['list'].map((item, i) => (
               <div className="position-relative" key={i} >
                 <div className={isEditMode ? 'dashed-border cursor-pointer' : ''} style={{ marginBottom: '3rem' }} onClick={() => showItemEdit(item.id)}>
-                  <p className='content font-weight-bold'>{item['content']},
-                    <span className="emphases">{item['empaseContent']}</span>
-                  </p>
+                  <div className='content font-weight-bold'>{item['content']},
+                    <div className="emphases"><Markup content={item['empaseContent']} /></div>
+                  </div>
                   <p className='title'>{item['name']}, Founder : {item['founder']}</p>
                 </div>
                 {isEditMode

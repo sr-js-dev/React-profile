@@ -4,9 +4,10 @@ import CustomTextEditor from './CustomTextEditor'
 const Quotes = (props) => {
   const { content, qoutesEdit, setQoutesEdit, id, setId, index } = props
   const [item, setItem] = useState({})
-
+  const [clientName, setClientName] = useState('')
   useEffect(() => {
     setItem(content)
+    setClientName(content['name'])
   }, [content])
 
   // text area scroll remove
@@ -29,6 +30,7 @@ const Quotes = (props) => {
   // client name changing
   const handleChange = (evt) => {
     setItem({ ...item, name: evt.target.value })
+    setClientName(evt.target.value)
   }
 
   return (
@@ -51,13 +53,13 @@ const Quotes = (props) => {
               />
             </div>
             <div className="emphase-content">
-              <span className="emphase-txt">{item['empaseContent']}</span>
-              <CustomTextEditor />
+              {/* <span className="emphase-txt">{item['empaseContent']}</span> */}
+              <CustomTextEditor item={item} setItem={setItem} />
             </div>
           </div>
           <div className="client-name-part">
             <h1>Client Name</h1>
-            <input type="text" className="common-input" value={item['name']} onChange={handleChange} />
+            <input type="text" className="common-input" value={clientName} onChange={handleChange} />
           </div>
         </div>
       </div>

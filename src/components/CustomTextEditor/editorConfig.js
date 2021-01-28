@@ -5,6 +5,7 @@ export const config = {
         items: [
             'bold',
             'italic',
+            'strikethrough',
             '|',
             'bulletedList',
             'numberedList',
