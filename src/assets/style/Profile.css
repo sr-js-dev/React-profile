@@ -302,6 +302,7 @@
     font-size: 12px;
 }
 .talk-about-edit .content .email-num-increase {
+    margin-top: 0px;
     width: 230px;
     height: 27px;
     border: 1px solid #8999A6;
@@ -312,6 +313,7 @@
 .talk-about-edit .email-num-set {
     display: flex;
     align-items: center;
+    flex-direction: row;
 }
 .talk-about-edit .select-box {
     padding: 0px 3px;
@@ -376,15 +378,15 @@
 }
 .extra-style {
     padding: 0px !important;
-    margin-left: 2.4rem !important;
-    margin-right: 2.4rem !important;
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
 }
 .profile-info-section a {
     text-decoration: underline;
 }
 /* qoutes section */
 .qoutes-section {
-    padding-top: 93px;
+    padding-top: 73px;
 }
 .qoutes-section .title {
     font-family: Open Sans;
@@ -428,6 +430,7 @@
 .qoutes-edit  .email-num-set {
     display: flex;
     align-items: center;
+    flex-direction: row;
 }
 .qoutes-edit  .select-box {
     padding: 0px 3px;
@@ -499,23 +502,8 @@
     font-weight: normal;
     font-size: 20px;
 }
-.quotes-item-edit .content textarea {
-    width: 100%;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    overflow: hidden;
-    color: rgba(255, 255, 255, 0.2);
-}
-.quotes-item-edit .content .emphase-content .emphase-txt{
-    width: 100%;
-    font-family: Open Sans;
-    font-size: 18px;
-    /* color: rgba(255, 255, 255, 0.2); */
-    background-color: #CFF2EE;
-    color: #797c80;
-    padding: 3px;
+.qoutes-section .title {
+    margin-top: 20px;
 }
 .quotes-item-edit .client-name-part input {
     font-family: Open Sans;
@@ -527,11 +515,9 @@
     width: 100%;
 }
 /* text editor */
-.custom-text-editor .ck-content {
-    background: transparent !important;
+.custom-text-editor .rdw-editor-toolbar {
+    color: #39444D;
 }
-
-
 
 .profile-photo-title-bar {
     position: fixed;
@@ -904,6 +890,19 @@ like a tickmark */
     }
 }
 @media (max-width:768px) {
+    .quotes-item-edit {
+        width: 100%;
+    }
+    .qoutes-edit {
+        width: 100%;
+    }
+    .contact-edit {
+        padding: 10px;
+        left: 0px;
+    }
+    .talk-about-section .talk-about-edit {
+        padding: 7px 14px;
+    }
     .photo-img-section {
         max-width: 100%;
         width: 100%;
@@ -919,6 +918,21 @@ like a tickmark */
     }
 }
 @media (max-width:576px) {
+    .talk-about-edit .email-num-set {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: start;
+    }
+    .qoutes-edit  .email-num-set {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .talk-about-edit .content .email-num-increase {
+        margin-top: 10px;
+    }
+    .quotes-item-edit .main-block {
+        padding: 12px 20px;
+    }
     .mobile-view {
         display: block;
     }

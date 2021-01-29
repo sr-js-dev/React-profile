@@ -145,9 +145,7 @@ const Profile = () => {
         const tempObj = {
           id: `${i + 1}`,
           content: QoutesDemoData.content,
-          empaseContent: QoutesDemoData.empaseContent,
           name: QoutesDemoData.name,
-          founder: QoutesDemoData.founder
         }
         _tempQuotes[i] = tempObj
       }
@@ -407,23 +405,21 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="title">
-                      <input type="text" className="common-input" defaultValue="Qoutes from clients About me" />
+                      <input type="text" className="common-input" value={qoutesEdit['title']} onChange={(evt) => setQoutesEdit({...qoutesEdit, title: evt.target.value})} />
                     </div>
                   </div>
                 </div>
                 <div className="layout" onClick={hideQuotesEdit}></div>
               </>
             }
-            <p className={isEditMode ? 'title mb-4 dashed-border cursor-pointer' : 'title mb-4'} onClick={showQuotes}>Qoutes from Clients <span className="font-weight-bold">About me</span></p>
+            <p className={isEditMode ? 'title mb-4 dashed-border cursor-pointer' : 'title mb-4 mt-4'} onClick={showQuotes}>{qoutesEdit['title']}</p>
           </div>
           {
             qoutesEdit['list'] && qoutesEdit['list'].length > 0 && qoutesEdit['list'].map((item, i) => (
               <div className="position-relative" key={i} >
                 <div className={isEditMode ? 'dashed-border cursor-pointer' : ''} style={{ marginBottom: '3rem' }} onClick={() => showItemEdit(item.id)}>
-                  <div className='content font-weight-bold'>{item['content']},
-                    <div className="emphases"><Markup content={item['empaseContent']} /></div>
-                  </div>
-                  <p className='title'>{item['name']}, Founder : {item['founder']}</p>
+                  <div className='content font-weight-bold'><Markup content={item['content']} /></div>
+                  <p className='title'>{item['name']}</p>
                 </div>
                 {isEditMode
                   && selectedId === item.id
@@ -433,30 +429,63 @@ const Profile = () => {
           }
         </div>
         {/* mobile view for section3 */}
-        <div className="profile-info-section mobile-view">
-          <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'}>
-            <div className="col-lg-4">
-              <h1>Company</h1>
-              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
+        <div className="profile-info-section mobile-view position-relative">
+              {
+                isEditMode && profileEdit['isOpen'] &&
+                <>
+                  <div className="profile-edit">
+                    <form className="position-relative" onSubmit={profileSave}>
+                      <button className="btn-save-edit-mode">Save</button>
+                      <div className="row">
+                        <div className="col-lg-4">
+                          <h1>Company</h1>
+                          <input type="text" name="company" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['company']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Department</h1>
+                          <input type="text" name="department" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['department']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Location</h1>
+                          <input type="text" name="location" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['location']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Address</h1>
+                          <textarea name="address" rows="4" defaultValue={profileEdit['info'] && profileEdit['info']['address']} />
+                        </div>
+                        <div className="col-lg-4">
+                          <h1>Office number</h1>
+                          <input type="text" name="officeNum" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['officeNum']} />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div className="layout" onClick={() => setProfileEdit({ ...profileEdit, isOpen: false })}></div>
+                </>
+              }
+              <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'} onClick={showProfileEdit}>
+                <div className="col-lg-4">
+                  <h1>Company</h1>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
+                </div>
+                <div className="col-lg-4">
+                  <h1>Department</h1>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
+                </div>
+                <div className="col-lg-4">
+                  <h1>Location</h1>
+                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
+                </div>
+                <div className="col-lg-4">
+                  <h1>Address</h1>
+                  <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
+                </div>
+                <div className="col-lg-4">
+                  <h1>Office number</h1>
+                  <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
+                </div>
+              </div>
             </div>
-            <div className="col-lg-4">
-              <h1>Department</h1>
-              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
-            </div>
-            <div className="col-lg-4">
-              <h1>Location</h1>
-              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
-            </div>
-            <div className="col-lg-4">
-              <h1>Address</h1>
-              <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
-            </div>
-            <div className="col-lg-4">
-              <h1>Office number</h1>
-              <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
-            </div>
-          </div>
-        </div>
       </div>
       {/* open Edit Menu */}
       {

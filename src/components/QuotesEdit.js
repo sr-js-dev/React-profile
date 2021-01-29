@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import CustomTextEditor from './CustomTextEditor'
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const Quotes = (props) => {
-  const { content, qoutesEdit, setQoutesEdit, id, setId, index } = props
+  const { content, qoutesEdit, setQoutesEdit, setId, index } = props
   const [item, setItem] = useState({})
   const [clientName, setClientName] = useState('')
+  const [editorState, setEditorState] = useState('');
+
   useEffect(() => {
     setItem(content)
     setClientName(content['name'])
   }, [content])
 
-  // text area scroll remove
-  const handleKeyDown = (e) => {
-    var el = e.target;
-    setTimeout(function () {
-      el.style.cssText = 'height:auto; padding:0';
-      el.style.cssText = 'height:' + el.scrollHeight + 'px';
-    }, 0);
-  }
+  useEffect(() => {
+    if (!item['content']) return
+    const html = item['content'];
+    const contentBlock = htmlToDraft(html);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const _editorState = EditorState.createWithContent(contentState);
+      setEditorState(_editorState)
+    }
+  }, [item])
+
+  // text editor data change
+  const onEditorStateChange = (_editorState) => {
+    setEditorState(_editorState)
+  };
 
   // quotes data save
   const saveQuotesData = () => {
     const _qoutesEdit = [...qoutesEdit['list']]
-    _qoutesEdit[index] = { ...item }
+    const _item = { ...item }
+    _item['content'] = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    _qoutesEdit[index] = { ..._item }
     setQoutesEdit({ ...qoutesEdit, list: _qoutesEdit })
     setId(0)
   }
@@ -43,18 +58,13 @@ const Quotes = (props) => {
             <span>Maximum  500 characters</span>
           </div>
           <div className="content">
-            <div>
-              <textarea
-                className="common-textarea"
-                value={item['content']}
-                onChange={(evt) => setItem({ ...item, content: evt.target.value })}
-                maxLength="500"
-                onKeyDown={handleKeyDown}
+            <div className="custom-text-editor">
+              <Editor
+                editorState={editorState}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={onEditorStateChange}
               />
-            </div>
-            <div className="emphase-content">
-              {/* <span className="emphase-txt">{item['empaseContent']}</span> */}
-              <CustomTextEditor item={item} setItem={setItem} />
             </div>
           </div>
           <div className="client-name-part">
