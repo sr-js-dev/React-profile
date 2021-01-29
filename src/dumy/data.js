@@ -111,3 +111,9 @@ export const QoutesDemoData = {
   content: "This is by far the best accounting service that I've ever used. A unique combination of quality, affordability and kindness. Virtually, this is the best experience you can have with any accounting firm. For our company (Eventera Ltd),<span style='background: #CFF2EE;color: #15202B'>they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!</span>",
   name: "Petros Topouzis: eventera.io",
 }
+
+export const ProfileInfo = {
+  name: 'Omar Faruq BA (Hons), ACCA',
+  position: 'Client Partner - Tech & High Growth',
+  isOpen: false
+}

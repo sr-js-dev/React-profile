@@ -19,7 +19,7 @@ import placeholder from '../assets/img/profileImg.png';
 // style
 import "../assets/style/Profile.css";
 // dumy data
-import { ThemeMode, TalkAboutData, ProfileData, QoutesData, QoutesDemoData } from '../dumy/data'
+import { ThemeMode, TalkAboutData, ProfileData, QoutesData, QoutesDemoData, ProfileInfo } from '../dumy/data'
 
 const Profile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -36,6 +36,7 @@ const Profile = () => {
   const [qoutesEdit, setQoutesEdit] = useState({})
   const [tempqoutesEdit, setTempQoutesEdit] = useState({})
   const [selectedId, setSelectedId] = useState(0)
+  const [profileNamePos, setProfileNamePos] = useState({})
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
   const [contactEditModal, setContactEditModal] = useState({
     viewOpen: false,
@@ -58,6 +59,7 @@ const Profile = () => {
     setTalkAboutEdit(TalkAboutData)
     setProfileEdit(ProfileData)
     setQoutesEdit(QoutesData)
+    setProfileNamePos(ProfileInfo)
   }, [])
 
   useEffect(() => {
@@ -134,6 +136,17 @@ const Profile = () => {
     if (!isEditMode) return
     setSelectedId(index)
   }
+  // profile name and pos 
+  const showProfileNameEdit = () => {
+    if(!isEditMode) return
+    setProfileNamePos({...profileNamePos, isOpen: true})
+  }
+  // hide profile name and position
+  const hideProfileNamePos = (evt) => {
+    console.log("Dddd")
+    evt.preventDefault();
+    setProfileNamePos({...profileNamePos, isOpen: false})
+  }
   // qoutes list change
   const qoutesListChange = (evt) => {
     const _qoutesEdit = { ...qoutesEdit }
@@ -156,6 +169,14 @@ const Profile = () => {
       }
       setQoutesEdit({ ...qoutesEdit, list: _tempQuotes })
     }
+  }
+  // save profile name and position
+  const saveNamePosition = (evt) => {
+    evt.preventDefault();
+    const data = new FormData(evt.target);
+    const _name = data.get('name') || profileNamePos['name']
+    const _position = data.get('position') || profileNamePos['position']
+    setProfileNamePos({name: _name, position: _position, isOpen: false})
   }
   // contact value change
   const contactChange = (evt) => {
@@ -262,7 +283,8 @@ const Profile = () => {
             <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
               <div className="row mx-3">
                 <div className="col-lg-5 photo-part">
-                <form encType="multipart/form-data">
+                {/* <form encType="multipart/form-data"> */}
+                <div>
                   <div className={isEditMode ? 'photo-dashed-border position-relative photo-img-section' : 'position-relative photo-img-section'}>
                     {
                       isEditMode ?
@@ -281,9 +303,11 @@ const Profile = () => {
                           </label>
                         </> : null
                     }
-                    <div className={isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
-                      <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>Omar Faruq BA (Hons), ACCA</p>
-                      <p className={isEditMode ? 'text-white' : ''}>Client Partner - Tech & High Growth</p>
+                    <div className={isEditMode ? 'photo-detail custom-bg-color cursor-pointer' : 'photo-detail'}>
+                        <div onClick={showProfileNameEdit}>
+                          <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>{profileNamePos['name']}</p>
+                          <p className={isEditMode ? 'text-white' : ''}>{profileNamePos['position']}</p>
+                        </div>
                     </div>
                     {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
                     <img src={src} alt={alt} className="profile-img"/>
@@ -296,8 +320,30 @@ const Profile = () => {
                         onChange={handleImg}
                     />
                   </div>
-                  </form>
+                  </div>
+                  {/* </form> */}
                   {/* image upload end */}
+                  {
+                    isEditMode && profileNamePos['isOpen'] &&
+                    <>
+                    <div className="name-position-edit">
+                      <form className="position-relative" onSubmit={saveNamePosition}>
+                        <button className="btn-save-edit-mode cursor-pointer">save</button>
+                        <div>
+                          <div className="name-section">
+                            <p>Name</p>
+                            <input type="text" className="common-input" name="name" defaultValue={profileNamePos['name']} />
+                          </div>
+                          <div className="position-section">
+                            <p>Position</p>
+                            <input type="text" className="common-input" name="position" defaultValue={profileNamePos['position']} />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="layout" onClick={hideProfileNamePos}></div> 
+                    </> 
+                  }
                 </div>
                 <div className={isEditMode ? 'col-lg-7 dashed-border mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
                   {

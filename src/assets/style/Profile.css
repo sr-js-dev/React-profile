@@ -183,6 +183,40 @@
     font-size: 20px;
     cursor: pointer;
 }
+.name-position-edit {
+    position: absolute;
+    background-color: #15202B;
+    width: 130%;
+    top: 0px;
+    left: 16px;
+    z-index: 999;
+}
+.name-position-edit>form {
+    padding: 15px 10px;
+}
+.name-position-edit p {
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px !important;
+    color: #FFFFFF;
+    opacity: 0.7;
+    margin-bottom: 0px;
+    display: inline;
+}
+.name-position-edit .name-section {
+    margin-bottom: 15px;
+}
+.name-position-edit input {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #7b7b7b;
+    transition: all 0.2s;
+    width: 100%;
+    overflow: hidden;
+}
 /* contact-edit section */
 .contact-edit {
     position: absolute;
@@ -894,6 +928,9 @@ like a tickmark */
 }
 @media (max-width:768px) {
     .quotes-item-edit {
+        width: 100%;
+    }
+    .name-position-edit {
         width: 100%;
     }
     .qoutes-edit {
