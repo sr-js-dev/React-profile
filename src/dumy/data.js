@@ -95,12 +95,12 @@ export const QoutesData = {
   list: [
     {
       id: "1",
-      content: "<p>This is by far the best accounting service that I've ever used. A unique combination of quality, affordability and kindness. Virtually, this is the best experience you can have with any accounting firm. For our company (Eventera Ltd),<span style='background: #CFF2EE;color: #15202B'>they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!</span></p>",
+      content: "<p><strong>This is by far the best accounting service that I've ever used. A unique combination of quality, affordability and kindness. Virtually, this is the best experience you can have with any accounting firm. For our company (Eventera Ltd),</strong><span style='color: rgb(21,32,43);background-color: rgb(207,242,238);'><strong>they went above and beyond, having multiple calls explaining the whole system and providing high-quality advice when needed. Kudos for doing such a fantastic job!</strong></span></p>",
       name: "Petros Topouzis: eventera.io",
     },
     {
       id: "2",
-      content: "I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.<span style='background: #CFF2EE;color: #15202B'>Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</span>",
+      content: "<p><strong>I am very much satisfied with service provided by OnTheGo Accountants. Whenever I raise request or any query, I will get the information immediately.</strong><span style='color: rgb(21,32,43);background-color: rgb(207,242,238);'><strong>Personally, I say thanks to Omar for his service. I will recommend OnTheGo accounts to other colleagues.</strong></span></p>",
       name: "Viswa",
     },
   ]

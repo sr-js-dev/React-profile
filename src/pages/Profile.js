@@ -188,6 +188,7 @@ const Profile = () => {
       setQoutesEdit({ ...qoutesEdit, list: _tempQuotes })
     }
   }
+  console.log('222222', qoutesEdit);
   // save profile name and position
   const saveNamePosition = (evt) => {
     evt.preventDefault();
@@ -579,7 +580,7 @@ const Profile = () => {
             qoutesEdit['list'] && qoutesEdit['list'].length > 0 && qoutesEdit['list'].map((item, i) => (
               <div className="position-relative" key={i} >
                 <div className={isEditMode ? 'dashed-border cursor-pointer' : ''} style={{ marginBottom: '3rem' }} onClick={() => showItemEdit(item.id)}>
-                  <div className='content font-weight-bold'><Markup content={item['content']} /></div>
+                  <div className='content'><Markup content={item['content']} /></div>
                   <p className='title'>{item['name']}</p>
                 </div>
                 {isEditMode
