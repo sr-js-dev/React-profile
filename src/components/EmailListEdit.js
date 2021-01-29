@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { EmailItemCheck } from '../dumy/data'
+import Arrow from '../assets/img/arrow.svg'
 
 const EmailListEdit = (props) => {
   const { setIsTalkEdit, talkAboutEdit, setTalkAboutEdit } = props
   const [emailNum, setEmailNum] = useState(0)
   const [tempEmailList, setTempEmailList] = useState([])
   const [title, setTitle] = useState('')
+  const [isShowSelect, setIsShowSelect] = useState(false)
 
   useEffect(() => {
     setTempEmailList(talkAboutEdit['emailList'])
@@ -13,11 +15,13 @@ const EmailListEdit = (props) => {
     setTitle(talkAboutEdit['title'])
   }, [talkAboutEdit])
 
+
   // email count change
-  const emailNumSet = (evt) => {
-    setEmailNum(evt.target.value)
-    if (evt.target.value === "") return;
-    let val = parseInt(evt.target.value)
+  const emailNumSet = (index) => {
+    setEmailNum(index)
+    setIsShowSelect(false)
+    if (index === "") return;
+    let val = parseInt(index)
     let len = parseInt(tempEmailList.length)
     if (len > val) {
       let _tempEmailList = [...tempEmailList];
@@ -76,8 +80,21 @@ const EmailListEdit = (props) => {
             <span className="require">Email Messages: Maximum 240 characters each</span>
             <div className="position-relative email-num-increase">
               <div className="select-box">
-                <span>How many email messages</span>
-                <input type="text" className="email-num-input" value={emailNum} onChange={emailNumSet} />
+                <div className="cursor-pointer" onClick={() =>setIsShowSelect(!isShowSelect)}>
+                  <span>How many email messages</span>
+                  <span className="ml-2">{emailNum}</span>
+                  <span className="ml-1"><img src={Arrow} className="arrow" alt="arrow" style={{ transform: isShowSelect ? 'rotate(-180deg)' : 'rotate(0deg)' }} /></span>
+                </div>
+                {
+                  isShowSelect &&
+                  <ul className="email-list cursor-pointer">
+                    {
+                      [...Array(6)].map((item, i) => (
+                        <li key={i} onClick={() => emailNumSet(i+1)}>{i+1}</li>
+                      ))
+                    }
+                  </ul>
+                }
               </div>
             </div>
           </div>

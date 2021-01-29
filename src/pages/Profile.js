@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import BackgroundImg from "../assets/img/bg-img2.png";
-import ProfileImg from "../assets/img/profileImg.png";
 import Logo from "../assets/img/Logo.svg";
 import Vector from "../assets/img/Vector.svg";
 import List from "../assets/img/Number-background.svg";
