@@ -15,6 +15,7 @@ import EmailListEdit from '../components/EmailListEdit'
 import QoutesEdit from '../components/QuotesEdit'
 import { Markup } from 'interweave';
 import placeholder from '../assets/img/profileImg.png';
+import ReactAvatarEditor from 'react-avatar-editor'
 // style
 import "../assets/style/Profile.css";
 // dumy data
@@ -49,6 +50,17 @@ const Profile = () => {
       email: true
     }
   })
+  const [canvasImage, setCanvasImageEdit] = useState({
+    image: placeholder,
+    allowZoomOut: false,
+    position: { x: 0.5, y: 0.5 },
+    rotate: 0,
+    borderRadius: 0,
+    preview: null,
+    viewImage: '',
+    scale: 1
+  })
+  // const [avatarScale, setAvatarScale] = useState(1)
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
     alt: 'Upload an Image'
@@ -249,9 +261,26 @@ const Profile = () => {
         src: URL.createObjectURL(e.target.files[0]),
         alt: e.target.files[0].name
       });
+      setCanvasImageEdit({...canvasImage, image: URL.createObjectURL(e.target.files[0])})
     }
   }
-
+  var canvasAvatar;
+  const setEditorRef = (editor) => {
+    canvasAvatar = editor;
+  }
+  const handlePositionChange = position => {
+    setCanvasImageEdit({ ...canvasImage, position: position })
+  }
+  const handleScale = e => {
+    const scale = parseFloat(e.target.value)
+    setCanvasImageEdit({...canvasImage, scale: scale});
+    const img = canvasAvatar.getImageScaledToCanvas().toDataURL();
+    setImg({
+      src: img,
+      alt: "avatar"
+    });
+  }
+  
   return (
     <div
       className="container-fluid"
@@ -309,7 +338,26 @@ const Profile = () => {
                         </div>
                       </div>
                       {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
-                      <img src={src} alt={alt} className="profile-img" />
+                      {
+                        isEditMode ?
+                        <>
+                          <ReactAvatarEditor
+                            ref={(ref) =>setEditorRef(ref)}
+                            scale={parseFloat(canvasImage.scale)}
+                            // width={"100%"}
+                            // height={"100%"}
+                            style={{width: '100%', height: '100%'}}
+                            position={canvasImage.position}
+                            onPositionChange={handlePositionChange}
+                            rotate={parseFloat(canvasImage.rotate)}
+                            borderRadius={canvasImage.width / (100 / canvasImage.borderRadius)}
+                            image={canvasImage.image}
+                            border={0}
+                            className="editor-canvas"
+                          />
+                          
+                        </> : <img src={src} alt={alt} className="profile-img" />
+                      }
                       {/* image upload */}
                       <input
                         type="file"
@@ -318,7 +366,21 @@ const Profile = () => {
                         className="visually-hidden"
                         onChange={handleImg}
                       />
+                      
+                      
                     </div>
+                    {isEditMode ? 
+                      <>
+                        <input
+                          name="scale"
+                          type="range"  
+                          onChange={handleScale}
+                          min={canvasImage.allowZoomOut ? '0.1' : '1'}
+                          max="2"
+                          step="0.01"
+                          defaultValue="1"
+                        />
+                      </> : null}
                   </div>
                   {/* </form> */}
                   {/* image upload end */}
