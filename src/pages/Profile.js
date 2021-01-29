@@ -267,16 +267,18 @@ const Profile = () => {
                     {
                       isEditMode ?
                         <>
-                          <div className="photo-layout"></div>
-                          <div className="add-photo d-flex align-items-center">
-                            <label htmlFor="photo" className="form-img__file-label" className="h-100 cursor-pointer">
-                              <img src={PhotoAdd} alt="photoAdd" />
-                            </label>
-                            <div className="ml-2">
-                              <p className="mb-0 add-your-img">Add your Image</p>
-                              <p className="mb-0 img-size">W 200 * H 300</p>
+                          <label htmlFor="photo" className="form-img__file-label" className="cursor-pointer">
+                            <div className="photo-layout"></div>
+                            <div className="add-photo d-flex align-items-center">
+                              <div className="h-100">
+                                <img src={PhotoAdd} alt="photoAdd" />
+                              </div>
+                              <div className="ml-2">
+                                <p className="mb-0 add-your-img">Add your Image</p>
+                                <p className="mb-0 img-size">W 200 * H 300</p>
+                              </div>
                             </div>
-                          </div>
+                          </label>
                         </> : null
                     }
                     <div className={isEditMode ? 'photo-detail custom-bg-color' : 'photo-detail'}>
