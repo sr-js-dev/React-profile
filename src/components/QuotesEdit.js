@@ -37,6 +37,7 @@ const Quotes = (props) => {
     const _qoutesEdit = [...qoutesEdit['list']]
     const _item = { ...item }
     _item['content'] = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    _item['name'] = clientName
     _qoutesEdit[index] = { ..._item }
     setQoutesEdit({ ...qoutesEdit, list: _qoutesEdit })
     setId(0)
@@ -44,7 +45,6 @@ const Quotes = (props) => {
 
   // client name changing
   const handleChange = (evt) => {
-    setItem({ ...item, name: evt.target.value })
     setClientName(evt.target.value)
   }
 

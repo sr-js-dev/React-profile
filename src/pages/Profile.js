@@ -50,9 +50,9 @@ const Profile = () => {
       email: true
     }
   })
-  const [{alt, src}, setImg] = useState({
-      src: placeholder,
-      alt: 'Upload an Image'
+  const [{ alt, src }, setImg] = useState({
+    src: placeholder,
+    alt: 'Upload an Image'
   });
   // Talk About string get from dumy data
   useEffect(() => {
@@ -138,14 +138,14 @@ const Profile = () => {
   }
   // profile name and pos 
   const showProfileNameEdit = () => {
-    if(!isEditMode) return
-    setProfileNamePos({...profileNamePos, isOpen: true})
+    if (!isEditMode) return
+    setProfileNamePos({ ...profileNamePos, isOpen: true })
   }
   // hide profile name and position
   const hideProfileNamePos = (evt) => {
     console.log("Dddd")
     evt.preventDefault();
-    setProfileNamePos({...profileNamePos, isOpen: false})
+    setProfileNamePos({ ...profileNamePos, isOpen: false })
   }
   // qoutes list change
   const qoutesListChange = (evt) => {
@@ -176,7 +176,7 @@ const Profile = () => {
     const data = new FormData(evt.target);
     const _name = data.get('name') || profileNamePos['name']
     const _position = data.get('position') || profileNamePos['position']
-    setProfileNamePos({name: _name, position: _position, isOpen: false})
+    setProfileNamePos({ name: _name, position: _position, isOpen: false })
   }
   // contact value change
   const contactChange = (evt) => {
@@ -245,12 +245,12 @@ const Profile = () => {
   }
 
   const handleImg = (e) => {
-    if(e.target.files[0]) {
-          setImg({
-              src: URL.createObjectURL(e.target.files[0]),
-              alt: e.target.files[0].name
-          });    
-      }   
+    if (e.target.files[0]) {
+      setImg({
+        src: URL.createObjectURL(e.target.files[0]),
+        alt: e.target.files[0].name
+      });
+    }
   }
 
   return (
@@ -283,69 +283,69 @@ const Profile = () => {
             <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
               <div className="row mx-3">
                 <div className="col-lg-5 photo-part">
-                {/* <form encType="multipart/form-data"> */}
-                <div>
-                  <div className={isEditMode ? 'photo-dashed-border position-relative photo-img-section' : 'position-relative photo-img-section'}>
-                    {
-                      isEditMode ?
-                        <>
-                          <label htmlFor="photo" className="form-img__file-label" className="cursor-pointer">
-                            <div className="photo-layout"></div>
-                            <div className="add-photo d-flex align-items-center">
-                              <div className="h-100">
-                                <img src={PhotoAdd} alt="photoAdd" />
+                  {/* <form encType="multipart/form-data"> */}
+                  <div>
+                    <div className={isEditMode ? 'photo-dashed-border position-relative photo-img-section' : 'position-relative photo-img-section'}>
+                      {
+                        isEditMode ?
+                          <>
+                            <label htmlFor="photo" className="form-img__file-label" className="cursor-pointer">
+                              <div className="photo-layout"></div>
+                              <div className="add-photo d-flex align-items-center">
+                                <div className="h-100">
+                                  <img src={PhotoAdd} alt="photoAdd" />
+                                </div>
+                                <div className="ml-2">
+                                  <p className="mb-0 add-your-img">Add your Image</p>
+                                  <p className="mb-0 img-size">W 200 * H 300</p>
+                                </div>
                               </div>
-                              <div className="ml-2">
-                                <p className="mb-0 add-your-img">Add your Image</p>
-                                <p className="mb-0 img-size">W 200 * H 300</p>
-                              </div>
-                            </div>
-                          </label>
-                        </> : null
-                    }
-                    <div className={isEditMode ? 'photo-detail custom-bg-color cursor-pointer' : 'photo-detail'}>
+                            </label>
+                          </> : null
+                      }
+                      <div className={isEditMode ? 'photo-detail custom-bg-color cursor-pointer' : 'photo-detail'}>
                         <div onClick={showProfileNameEdit}>
                           <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>{profileNamePos['name']}</p>
                           <p className={isEditMode ? 'text-white' : ''}>{profileNamePos['position']}</p>
                         </div>
-                    </div>
-                    {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
-                    <img src={src} alt={alt} className="profile-img"/>
-                    {/* image upload */}
-                    <input 
-                        type="file" 
-                        accept=".png, .jpg, .jpeg" 
+                      </div>
+                      {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
+                      <img src={src} alt={alt} className="profile-img" />
+                      {/* image upload */}
+                      <input
+                        type="file"
+                        accept=".png, .jpg, .jpeg"
                         id="photo"
                         className="visually-hidden"
                         onChange={handleImg}
-                    />
-                  </div>
+                      />
+                    </div>
                   </div>
                   {/* </form> */}
                   {/* image upload end */}
                   {
                     isEditMode && profileNamePos['isOpen'] &&
                     <>
-                    <div className="name-position-edit">
-                      <form className="position-relative" onSubmit={saveNamePosition}>
-                        <button className="btn-save-edit-mode cursor-pointer">save</button>
-                        <div>
-                          <div className="name-section">
-                            <p>Name</p>
-                            <input type="text" className="common-input" name="name" defaultValue={profileNamePos['name']} />
+                      <div className="name-position-edit">
+                        <form className="position-relative" onSubmit={saveNamePosition}>
+                          <button className="btn-save-edit-mode cursor-pointer">save</button>
+                          <div>
+                            <div className="name-section">
+                              <p>Name</p>
+                              <input type="text" className="common-input" name="name" defaultValue={profileNamePos['name']} />
+                            </div>
+                            <div className="position-section">
+                              <p>Position</p>
+                              <input type="text" className="common-input" name="position" defaultValue={profileNamePos['position']} />
+                            </div>
                           </div>
-                          <div className="position-section">
-                            <p>Position</p>
-                            <input type="text" className="common-input" name="position" defaultValue={profileNamePos['position']} />
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="layout" onClick={hideProfileNamePos}></div> 
-                    </> 
+                        </form>
+                      </div>
+                      <div className="layout" onClick={hideProfileNamePos}></div>
+                    </>
                   }
                 </div>
-                <div className={isEditMode ? 'col-lg-7 dashed-border mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
+                <div className={isEditMode ? 'col-lg-7 mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
                   {
                     isEditMode && isContactEdit &&
                     <>
@@ -367,11 +367,11 @@ const Profile = () => {
                       <div className="layout" onClick={() => setIsContactEdit(false)}></div>
                     </>
                   }
-                  <div className='cursor-pointer mb-3' onClick={contactDisplay}>
+                  <div className={isEditMode ? 'dashed-border cursor-pointer mb-3' : 'cursor-pointer mb-3'} onClick={contactDisplay}>
                     <h2 className='title mb-4'>{contactVal.title}</h2>
                     <p className='description mb-0'>{contactVal.msg}</p>
                   </div>
-                  <p className='similar-subject mb-0' onClick={showModal}>
+                  <p className={isEditMode ? 'dashed-border similar-subject mb-0' : 'similar-subject mb-0'} onClick={showModal}>
                     <span>{contactVal.emailMsg}</span>
                     <span className="m-left-8">
                       <img src={Vector} className="email-icon" alt="Vector" />
@@ -479,7 +479,7 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="title">
-                      <input type="text" className="common-input" value={qoutesEdit['title']} onChange={(evt) => setQoutesEdit({...qoutesEdit, title: evt.target.value})} />
+                      <input type="text" className="common-input" value={qoutesEdit['title']} onChange={(evt) => setQoutesEdit({ ...qoutesEdit, title: evt.target.value })} />
                     </div>
                   </div>
                 </div>
@@ -504,62 +504,62 @@ const Profile = () => {
         </div>
         {/* mobile view for section3 */}
         <div className="profile-info-section mobile-view position-relative">
-              {
-                isEditMode && profileEdit['isOpen'] &&
-                <>
-                  <div className="profile-edit">
-                    <form className="position-relative" onSubmit={profileSave}>
-                      <button className="btn-save-edit-mode">Save</button>
-                      <div className="row">
-                        <div className="col-lg-4">
-                          <h1>Company</h1>
-                          <input type="text" name="company" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['company']} />
-                        </div>
-                        <div className="col-lg-4">
-                          <h1>Department</h1>
-                          <input type="text" name="department" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['department']} />
-                        </div>
-                        <div className="col-lg-4">
-                          <h1>Location</h1>
-                          <input type="text" name="location" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['location']} />
-                        </div>
-                        <div className="col-lg-4">
-                          <h1>Address</h1>
-                          <textarea name="address" rows="4" defaultValue={profileEdit['info'] && profileEdit['info']['address']} />
-                        </div>
-                        <div className="col-lg-4">
-                          <h1>Office number</h1>
-                          <input type="text" name="officeNum" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['officeNum']} />
-                        </div>
-                      </div>
-                    </form>
+          {
+            isEditMode && profileEdit['isOpen'] &&
+            <>
+              <div className="profile-edit">
+                <form className="position-relative" onSubmit={profileSave}>
+                  <button className="btn-save-edit-mode">Save</button>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <h1>Company</h1>
+                      <input type="text" name="company" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['company']} />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Department</h1>
+                      <input type="text" name="department" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['department']} />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Location</h1>
+                      <input type="text" name="location" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['location']} />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Address</h1>
+                      <textarea name="address" rows="4" defaultValue={profileEdit['info'] && profileEdit['info']['address']} />
+                    </div>
+                    <div className="col-lg-4">
+                      <h1>Office number</h1>
+                      <input type="text" name="officeNum" autoComplete="off" defaultValue={profileEdit['info'] && profileEdit['info']['officeNum']} />
+                    </div>
                   </div>
-                  <div className="layout" onClick={() => setProfileEdit({ ...profileEdit, isOpen: false })}></div>
-                </>
-              }
-              <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'} onClick={showProfileEdit}>
-                <div className="col-lg-4">
-                  <h1>Company</h1>
-                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
-                </div>
-                <div className="col-lg-4">
-                  <h1>Department</h1>
-                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
-                </div>
-                <div className="col-lg-4">
-                  <h1>Location</h1>
-                  <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
-                </div>
-                <div className="col-lg-4">
-                  <h1>Address</h1>
-                  <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
-                </div>
-                <div className="col-lg-4">
-                  <h1>Office number</h1>
-                  <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
-                </div>
+                </form>
               </div>
+              <div className="layout" onClick={() => setProfileEdit({ ...profileEdit, isOpen: false })}></div>
+            </>
+          }
+          <div className={isEditMode ? ' row dashed-border extra-style' : 'row mx-3'} onClick={showProfileEdit}>
+            <div className="col-lg-4">
+              <h1>Company</h1>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['company']}</p>
             </div>
+            <div className="col-lg-4">
+              <h1>Department</h1>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['department']}</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Location</h1>
+              <p className="mb-0">{profileEdit['info'] && profileEdit['info']['location']}</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Address</h1>
+              <p className="mb-0" style={{ width: '200px' }}>{profileEdit['info'] && profileEdit['info']['address']}</p>
+            </div>
+            <div className="col-lg-4">
+              <h1>Office number</h1>
+              <a href="#phone">{profileEdit['info'] && profileEdit['info']['officeNum']}</a>
+            </div>
+          </div>
+        </div>
       </div>
       {/* open Edit Menu */}
       {

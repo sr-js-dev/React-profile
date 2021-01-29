@@ -151,7 +151,7 @@
     font-size: 14px !important;
 }
 .photo-detail p:last-child {
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 0px;
 }
 .custom-bg-color {
@@ -915,7 +915,7 @@ like a tickmark */
         font-size: 20px;
     }
     .photo-detail p:last-child {
-        font-size: 17px;
+        font-size: 16px;
     }
 }
 @media (max-width:1437px) {
