@@ -15,6 +15,7 @@ import ViewModal from '../components/ViewModal'
 import EmailListEdit from '../components/EmailListEdit'
 import QoutesEdit from '../components/QuotesEdit'
 import { Markup } from 'interweave';
+import placeholder from '../assets/img/profileImg.png';
 // style
 import "../assets/style/Profile.css";
 // dumy data
@@ -48,6 +49,10 @@ const Profile = () => {
       email: true
     }
   })
+  const [{alt, src}, setImg] = useState({
+      src: placeholder,
+      alt: 'Upload an Image'
+  });
   // Talk About string get from dumy data
   useEffect(() => {
     setTalkAboutEdit(TalkAboutData)
@@ -218,6 +223,15 @@ const Profile = () => {
     }, 0);
   }
 
+  const handleImg = (e) => {
+    if(e.target.files[0]) {
+          setImg({
+              src: URL.createObjectURL(e.target.files[0]),
+              alt: e.target.files[0].name
+          });    
+      }   
+  }
+
   return (
     <div
       className="container-fluid"
@@ -248,15 +262,16 @@ const Profile = () => {
             <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
               <div className="row mx-3">
                 <div className="col-lg-5 photo-part">
+                <form encType="multipart/form-data">
                   <div className={isEditMode ? 'photo-dashed-border position-relative photo-img-section' : 'position-relative photo-img-section'}>
                     {
                       isEditMode ?
                         <>
                           <div className="photo-layout"></div>
                           <div className="add-photo d-flex align-items-center">
-                            <div className="h-100">
+                            <label htmlFor="photo" className="form-img__file-label" className="h-100 cursor-pointer">
                               <img src={PhotoAdd} alt="photoAdd" />
-                            </div>
+                            </label>
                             <div className="ml-2">
                               <p className="mb-0 add-your-img">Add your Image</p>
                               <p className="mb-0 img-size">W 200 * H 300</p>
@@ -268,8 +283,19 @@ const Profile = () => {
                       <p className={isEditMode ? 'text-white font-weight-bold' : 'font-weight-bold'}>Omar Faruq BA (Hons), ACCA</p>
                       <p className={isEditMode ? 'text-white' : ''}>Client Partner - Tech & High Growth</p>
                     </div>
-                    <img src={ProfileImg} alt="profile" className="profile-img" />
+                    {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
+                    <img src={src} alt={alt} className="profile-img"/>
+                    {/* image upload */}
+                    <input 
+                        type="file" 
+                        accept=".png, .jpg, .jpeg" 
+                        id="photo"
+                        className="visually-hidden"
+                        onChange={handleImg}
+                    />
                   </div>
+                  </form>
+                  {/* image upload end */}
                 </div>
                 <div className={isEditMode ? 'col-lg-7 dashed-border mb-2 position-relative d-flex flex-column justify-content-between' : 'col-lg-7 mb-2 position-relative'}>
                   {

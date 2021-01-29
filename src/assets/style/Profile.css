@@ -83,7 +83,7 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    border-radius: 20px;
+    border-radius: 28px;
     opacity: 0.8;
 }
 .photo-section .photo-detail {
@@ -106,9 +106,12 @@
 .photo-img-section {
     max-width: 312px;
     width: 100%;
+    height: 312px;
 }
 .profile-img {
     width: 100%;
+    height: 100%;
+    border-radius: 29px;
 }
 .profile-edit {
     position: absolute;
@@ -159,7 +162,7 @@
 .photo-section .add-photo {
     position: absolute;
     top: 100px;
-    left: 15px;
+    padding-left: 15px;
     width: 100%;
 }
 .photo-section .add-photo .add-your-img {
@@ -995,4 +998,13 @@ like a tickmark */
         width: 100%;
         padding-top: 50px;
     }
+}
+
+/* this class is used to hide the file input */
+.visually-hidden {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
 }
