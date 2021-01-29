@@ -38,6 +38,8 @@ const Profile = () => {
   const [selectedId, setSelectedId] = useState(0)
   const [profileNamePos, setProfileNamePos] = useState({})
   const [contactVal, setContactVal] = useState({ title: 'Why you should contact me', msg: 'I have recently helped a 3 billion automative company in Germany reduce 30% of their company tax overhead.', emailMsg: 'Contact me on similar subject matter' })
+  const [isShowSelect, setIsShowSelect] = useState(false)
+  const [emailNum, setEmailNum] = useState(0)
   const [contactEditModal, setContactEditModal] = useState({
     viewOpen: false,
     editOpen: false,
@@ -91,6 +93,10 @@ const Profile = () => {
   useEffect(() => {
     if (contactEditModal.viewOpen) document.body.style.paddingRight = "0px";
   }, [contactEditModal.viewOpen])
+
+  // const emailNumSet = (index) => {
+    
+  // }
 
   const closeSelect = (evt) => {
     if (evt.target.id === "isOpenSelect") return;
@@ -159,10 +165,11 @@ const Profile = () => {
     setProfileNamePos({ ...profileNamePos, isOpen: false })
   }
   // qoutes list change
-  const qoutesListChange = (evt) => {
+  const qoutesListChange = (value) => {
+    setIsShowSelect(false)
     const _qoutesEdit = { ...qoutesEdit }
-    if (evt.target.value === "") { setQoutesEdit({ ...qoutesEdit, list: [] }); return };
-    let val = parseInt(evt.target.value)
+    if (value === "") { setQoutesEdit({ ...qoutesEdit, list: [] }); return };
+    let val = parseInt(value)
     let len = parseInt(_qoutesEdit['list'].length)
     if (len > val) {
       let _tempQuotes = _qoutesEdit['list'];
@@ -378,7 +385,7 @@ const Profile = () => {
                           min={canvasImage.allowZoomOut ? '0.1' : '1'}
                           max="2"
                           step="0.01"
-                          defaultValue="1"
+                          value={canvasImage.scale}
                         />
                       </> : null}
                   </div>
@@ -534,10 +541,29 @@ const Profile = () => {
                       <span className="require">Email Messages: Maximum 240 characters</span>
                       <div className="position-relative email-num-increase">
                         <div className="select-box">
+                          <div className="cursor-pointer" onClick={() =>setIsShowSelect(!isShowSelect)}>
+                            <span>How many email messages</span>
+                            <span className="ml-2">{qoutesEdit['list'].length}</span>
+                            <span className="ml-1"><img src={Arrow} className="arrow" alt="arrow" style={{ transform: isShowSelect ? 'rotate(-180deg)' : 'rotate(0deg)' }} /></span>
+                          </div>
+                          {
+                            isShowSelect &&
+                            <ul className="email-list cursor-pointer">
+                              {
+                                [...Array(6)].map((item, i) => (
+                                  <li key={i} onClick={() => qoutesListChange(i+1)}>{i+1}</li>
+                                ))
+                              }
+                            </ul>
+                          }
+                        </div>
+                      </div>
+                      {/* <div className="position-relative email-num-increase">
+                        <div className="select-box">
                           <span>How many email messages</span>
                           <input type="text" className="email-num-input" value={qoutesEdit['list'].length} onChange={qoutesListChange} />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="title">
                       <input type="text" className="common-input" value={qoutesEdit['title']} onChange={(evt) => setQoutesEdit({ ...qoutesEdit, title: evt.target.value })} />

@@ -382,7 +382,8 @@
     transition: all 0.3s ease-in-out;
     overflow:hidden;
 }
-.talk-about-edit .email-list {
+.email-list {
+    z-index: 1;
     position: absolute;
     width: 101%;
     color: white;
@@ -395,21 +396,21 @@
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
 }
-.talk-about-edit .email-list li {
+.email-list li {
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     transition: all 0.3s linear;
 }
-.talk-about-edit .email-list li:hover {
+.email-list li:hover {
     background-color: #39444D;
 }
-.talk-about-edit .email-list li:not(:first-child) {
+.email-list li:not(:first-child) {
     padding: 9px 13px;
     border-top: 1px solid #8999A6;
 }
-.talk-about-edit .email-list li:first-child {
+.email-list li:first-child {
     padding: 9px 13px;
 }
 .btn-save-edit-mode {
