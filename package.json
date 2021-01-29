@@ -17,6 +17,7 @@
     "draftjs-to-html": "^0.9.1",
     "interweave": "^12.7.0",
     "react": "^17.0.1",
+    "react-avatar-editor": "^11.1.0",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-draft-wysiwyg": "^1.14.5",
