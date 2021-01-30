@@ -317,7 +317,7 @@ const Profile = () => {
             </div>
             {/* section1 */}
             <div className={isEditMode ? 'photo-section dashed-border-bottom' : 'photo-section solid-border-bottom'}>
-              <div className="row mx-3">
+              <div className="row mx-sm-3 mx-1">
                 <div className="col-lg-5 photo-part">
                   {/* <form encType="multipart/form-data"> */}
                   <div>
@@ -451,7 +451,7 @@ const Profile = () => {
             </div>
             {/* section2 */}
             <div className={isEditMode ? 'talk-about-section dashed-border-bottom' : 'talk-about-section solid-border-bottom'}>
-              <div className={isTalkEdit ? 'row extra-style' : 'row mx-3'}>
+              <div className={isTalkEdit ? 'row extra-style' : 'row mx-sm-3'}>
                 <div className="col-lg-12 position-relative">
                   <h2 className={isEditMode ? 'dashed-border title cursor-pointer' : 'title'} onClick={talkAboutDisplay}>{talkAboutEdit['title']}</h2>
                   {
